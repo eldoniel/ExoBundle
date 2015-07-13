@@ -66,22 +66,26 @@
         <div class="list-group-item">
             <form name="form_type_question">
                 <div class="form-group row">
-                <label class="col-md-3 control-label" for="menu_type_question">{{ 'kind_question' | trans({}, 'ujm_exo') }}?&nbsp;&nbsp;</label>
-                <div class="col-md-9">
-                    <select class="form-control" name="menu_type_question" id="menu_type_question" onchange="cherche_type('{{ 'warning_change_type_q' | trans({}, 'ujm_exo') }} ?', '{{ exoID }}', '{{ path('ujm_question_display_form_type')}}' )">
-                        <option selected="selected" disabled>{{ 'choose_type' | trans({}, 'ujm_exo') }}</option>
-                        {% for type in interactionType %}
-                            {% for value in type %}
-                                <option value="{{ type[loop.index0] }}">{{ type[loop.index0] | trans({}, 'ujm_exo') }}</option>
+                    <label class="col-md-3 control-label" for="menu_type_question">{{ 'kind_question' | trans({}, 'ujm_exo') }}?&nbsp;&nbsp;</label>
+                    <div class="col-md-9">
+                        <select class="form-control" name="menu_type_question" id="menu_type_question" onchange="cherche_type('{{ 'warning_change_type_q' | trans({}, 'ujm_exo') }} ?', '{{ exoID }}', '{{ path('ujm_question_display_form_type')}}' )">
+                            <option selected="selected" disabled>{{ 'choose_type' | trans({}, 'ujm_exo') }}</option>
+                            {% for type in interactionType %}
+                                {% for value in type %}
+                                    <option value="{{ type[loop.index0] }}">{{ type[loop.index0] | trans({}, 'ujm_exo') }}</option>
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
-                    </select>
-                </div>
+                        </select>
+                    </div>
                 </div>
             </form>
-        </div>
-
+        </div>            
     </div>
+                        
+               
+                        
+                        
+                        
     </div>{# end div of extend panel #}
     <div id="formulaire_interactions">
         {% if formWithError is defined %}

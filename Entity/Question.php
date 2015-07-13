@@ -3,6 +3,8 @@
 namespace UJM\ExoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UJM\ExoBundle\Entity\ExerciseGrammar\Instruction;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * UJM\ExoBundle\Entity\Question
@@ -91,7 +93,11 @@ class Question
      * @ORM\ManyToOne(targetEntity="UJM\ExoBundle\Entity\Category")
      */
     private $category;
-
+    
+    /**
+     * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\Instruction", mappedBy="question", cascade={"persist","remove"})
+     */
+    private $instructions;
 
     /**
      * Constructs a new instance of Expertises / Documents
@@ -101,6 +107,7 @@ class Question
         $this->documents = new \Doctrine\Common\Collections\ArrayCollection;
         $this->setLocked(false);
         $this->setModel(false);
+        $this->instructions = new ArrayCollection();
     }
 
     /**
@@ -277,5 +284,52 @@ class Question
     public function setCategory(\UJM\ExoBundle\Entity\Category $category)
     {
         $this->category = $category;
+    }
+    
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+    
+    public function setInstructions(ArrayCollection $instructions)
+    {
+        foreach ($instructions as $instruction) {
+            $this->addInstruction($instruction);
+        }
+        
+        return $this;
+    }
+    
+    public function addInstruction(Instruction $instruction)
+    {
+        if (!$this->instructions->contains($instruction)) {
+            $this->instructions->add($instruction);
+            $instruction->setQuestion($this);
+        }
+        
+        return $this;
+    }
+    
+    
+    public function addInstructions(ArrayCollection $instructions)
+    {
+        foreach ($instructions as $instruction) {
+            if (!$this->instructions->contains($instruction)) {
+                $this->instructions->add($instruction);
+                $instruction->setActivity($this);
+            }
+        }
+        
+        return $this;
+    }
+    
+    public function removeInstruction(Instruction $instruction)
+    {
+        if ($this->instructions->contains($instruction)) {
+            $this->instructions->removeElement($instruction);
+            $instruction->setActivity(null);
+        }
+        
+        return $this;
     }
 }

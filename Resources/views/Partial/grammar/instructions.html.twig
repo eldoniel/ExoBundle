@@ -1,0 +1,12 @@
+<hr>
+<span id="add-instruction" class="btn btn-default">add-instruction</span>
+<ul class="list-group instructions" data-prototype="{{ form_widget(form.interaction.question.instructions.vars.prototype.media)|e }}">
+    {#
+    {% for instruction in form.interaction.question.instructions %}
+        <li class="list-group-item col-md-12" >
+            {{ form_widget(instruction.media) }}
+        </li>
+    {% endfor %}
+    #}
+</ul>
+            
