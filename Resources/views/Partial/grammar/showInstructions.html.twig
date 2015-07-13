@@ -1,0 +1,7 @@
+{% if interactionToDisplayed.interaction.question.instructions != null %}
+    {% for instruction in interactionToDisplayed.interaction.question.instructions %}
+        <p>{{ instruction.media }}</p>
+    {% endfor %}
+{% endif %}
+
+<hr/>

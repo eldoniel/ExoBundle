@@ -58,6 +58,7 @@
         <div class="list-group-item">
 
             {% include "UJMExoBundle:Partial:interactionPaper.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/showInstructions.html.twig" %}
 
             <form action="{{ path('ujm_interactionqcm_response') }}" method="post" {{ form_enctype(form) }}>
                 {{ form_widget(form) }}
