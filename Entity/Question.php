@@ -4,6 +4,7 @@ namespace UJM\ExoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use UJM\ExoBundle\Entity\ExerciseGrammar\Instruction;
+use UJM\ExoBundle\Entity\ExerciseGrammar\Content;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -98,6 +99,11 @@ class Question
      * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\Instruction", mappedBy="question", cascade={"persist","remove"})
      */
     private $instructions;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\Content", mappedBy="question", cascade={"persist","remove"})
+     */
+    private $contents;
 
     /**
      * Constructs a new instance of Expertises / Documents
@@ -108,6 +114,7 @@ class Question
         $this->setLocked(false);
         $this->setModel(false);
         $this->instructions = new ArrayCollection();
+        $this->contents = new ArrayCollection();
     }
 
     /**
@@ -316,7 +323,7 @@ class Question
         foreach ($instructions as $instruction) {
             if (!$this->instructions->contains($instruction)) {
                 $this->instructions->add($instruction);
-                $instruction->setActivity($this);
+                $instruction->setQuestion($this);
             }
         }
         
@@ -327,7 +334,54 @@ class Question
     {
         if ($this->instructions->contains($instruction)) {
             $this->instructions->removeElement($instruction);
-            $instruction->setActivity(null);
+            $instruction->setQuestion(null);
+        }
+        
+        return $this;
+    }
+    
+    public function getContents()
+    {
+        return $this->contents;
+    }
+    
+    public function setContents(ArrayCollection $contents)
+    {
+        foreach ($contents as $content) {
+            $this->addContent($content);
+        }
+        
+        return $this;
+    }
+    
+    public function addContent(Content $content)
+    {
+        if (!$this->contents->contains($content)) {
+            $this->contents->add($content);
+            $content->setQuestion($this);
+        }
+        
+        return $this;
+    }
+    
+    
+    public function addContents(ArrayCollection $contents)
+    {
+        foreach ($contents as $content) {
+            if (!$this->contents->contains($content)) {
+                $this->contents->add($content);
+                $content->setQuestion($this);
+            }
+        }
+        
+        return $this;
+    }
+    
+    public function removeContent(Instruction $content)
+    {
+        if ($this->contents->contains($content)) {
+            $this->contents->removeElement($content);
+            $content->setQuestion(null);
         }
         
         return $this;

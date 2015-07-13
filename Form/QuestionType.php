@@ -60,6 +60,12 @@ class QuestionType extends AbstractType
                     // 'by_reference' => false
                 )
             )
+            ->add('contents', 'collection', array (
+                    'type'         => new ContentType(),
+                    'allow_add'    => true,
+                    'allow_delete' => true
+                )
+            )
             ->add('description', 'textarea', array(
                     'label' => 'question_description',
                     'required' => false,

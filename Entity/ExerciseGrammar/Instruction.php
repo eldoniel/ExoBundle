@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use UJM\ExoBundle\Entity\Question;
 
 /**
- * UJM\ExoBundle\Entity\ExerciseGrammar\Content
+ * UJM\ExoBundle\Entity\ExerciseGrammar\Instruction
  *
  * @ORM\Entity
  * @ORM\Table(name="ujm_instruction")
@@ -41,7 +41,7 @@ class Instruction
     
     /**
      * @ORM\ManyToOne(targetEntity="UJM\ExoBundle\Entity\Question", inversedBy="instructions")
-     * @ORM\JoinColumn(name="activity_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
      **/
     private $question;
 

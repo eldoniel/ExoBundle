@@ -1,0 +1,9 @@
+--- Contents ---
+
+{% if interactionToDisplayed.interaction.question.contents != null %}
+    {% for content in interactionToDisplayed.interaction.question.contents %}
+        <p>{{ content.media }}</p>
+    {% endfor %}
+{% endif %}
+
+<hr/>
