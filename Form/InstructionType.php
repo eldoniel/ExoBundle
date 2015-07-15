@@ -10,7 +10,7 @@ class InstructionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('media', 'text', array ('required' => true));
+        $builder->add('media', 'tinymce', array ('required' => true));
         $builder->add('position', 'hidden', array('data' => 1));
     }
 

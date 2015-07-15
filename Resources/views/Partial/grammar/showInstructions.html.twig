@@ -2,7 +2,7 @@
 
 {% if interactionToDisplayed.interaction.question.instructions != null %}
     {% for instruction in interactionToDisplayed.interaction.question.instructions %}
-        <p>{{ instruction.media }}</p>
+        <p>{{ instruction.media | raw }}</p>
     {% endfor %}
 {% endif %}
 

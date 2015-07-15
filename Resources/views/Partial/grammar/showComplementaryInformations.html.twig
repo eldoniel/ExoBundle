@@ -2,7 +2,7 @@
 
 {% if interactionToDisplayed.interaction.question.complementaryInformations != null %}
     {% for complementaryInformation in interactionToDisplayed.interaction.question.complementaryInformations %}
-        <p>{{ complementaryInformation.media }}</p>
+        <p>{{ complementaryInformation.media | raw }}</p>
     {% endfor %}
 {% endif %}
 
