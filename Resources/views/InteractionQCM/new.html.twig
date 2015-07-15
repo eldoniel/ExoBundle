@@ -15,6 +15,7 @@
             {% include "UJMExoBundle:Partial:cloneInterCreation.html.twig" %}
             {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
             {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
             {% include "UJMExoBundle:Partial:restform.html.twig" %}
         </div>
         <div class="panel-footer">
@@ -66,6 +67,20 @@
 	    });
             
 	    $("#add-instruction").on('click', function(e) {
+	        e.preventDefault();
+	        addTagForm(collectionHolder);
+	    });
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+            var collectionHolder = $('ul.complementaryInformations');
+            collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+	    });
+            
+	    $("#add-complementaryInformation").on('click', function(e) {
 	        e.preventDefault();
 	        addTagForm(collectionHolder);
 	    });

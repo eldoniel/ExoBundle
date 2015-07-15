@@ -5,6 +5,7 @@ namespace UJM\ExoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use UJM\ExoBundle\Entity\ExerciseGrammar\Instruction;
 use UJM\ExoBundle\Entity\ExerciseGrammar\Content;
+use UJM\ExoBundle\Entity\ExerciseGrammar\ComplementaryInformation;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -104,6 +105,11 @@ class Question
      * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\Content", mappedBy="question", cascade={"persist","remove"})
      */
     private $contents;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\ComplementaryInformation", mappedBy="question", cascade={"persist","remove"})
+     */
+    private $complementaryInformations;
 
     /**
      * Constructs a new instance of Expertises / Documents
@@ -115,6 +121,7 @@ class Question
         $this->setModel(false);
         $this->instructions = new ArrayCollection();
         $this->contents = new ArrayCollection();
+        $this->complementaryInformations = new ArrayCollection();
     }
 
     /**
@@ -377,11 +384,58 @@ class Question
         return $this;
     }
     
-    public function removeContent(Instruction $content)
+    public function removeContent(Content $content)
     {
         if ($this->contents->contains($content)) {
             $this->contents->removeElement($content);
             $content->setQuestion(null);
+        }
+        
+        return $this;
+    }
+    
+    public function getComplementaryInformations()
+    {
+        return $this->complementaryInformations;
+    }
+    
+    public function setComplementaryInformations(ArrayCollection $complementaryInformations)
+    {
+        foreach ($complementaryInformations as $complementaryInformation) {
+            $this->addContent($complementaryInformation);
+        }
+        
+        return $this;
+    }
+    
+    public function addComplementaryInformation(ComplementaryInformation $complementaryInformation)
+    {
+        if (!$this->complementaryInformations->contains($complementaryInformation)) {
+            $this->complementaryInformations->add($complementaryInformation);
+            $complementaryInformation->setQuestion($this);
+        }
+        
+        return $this;
+    }
+    
+    
+    public function addComplementaryInformations(ArrayCollection $complementaryInformations)
+    {
+        foreach ($complementaryInformations as $complementaryInformation) {
+            if (!$this->complementaryInformations->contains($complementaryInformation)) {
+                $this->complementaryInformations->add($complementaryInformation);
+                $complementaryInformation->setQuestion($this);
+            }
+        }
+        
+        return $this;
+    }
+    
+    public function removeComplementaryInformation(ComplementaryInformation $complementaryInformation)
+    {
+        if ($this->complementaryInformations->contains($complementaryInformation)) {
+            $this->complementaryInformations->removeElement($complementaryInformation);
+            $complementaryInformation->setQuestion(null);
         }
         
         return $this;

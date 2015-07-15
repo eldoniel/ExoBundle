@@ -5,7 +5,6 @@ namespace UJM\ExoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use UJM\ExoBundle\Entity\ExerciseGrammar\Instruction;
 
 use Claroline\CoreBundle\Entity\User;
 
@@ -62,6 +61,12 @@ class QuestionType extends AbstractType
             )
             ->add('contents', 'collection', array (
                     'type'         => new ContentType(),
+                    'allow_add'    => true,
+                    'allow_delete' => true
+                )
+            )
+            ->add('complementaryInformations', 'collection', array (
+                    'type'         => new ComplementaryInformationType(),
                     'allow_add'    => true,
                     'allow_delete' => true
                 )

@@ -1,0 +1,9 @@
+--- ComplementaryInformations ---
+
+{% if interactionToDisplayed.interaction.question.complementaryInformations != null %}
+    {% for complementaryInformation in interactionToDisplayed.interaction.question.complementaryInformations %}
+        <p>{{ complementaryInformation.media }}</p>
+    {% endfor %}
+{% endif %}
+
+<hr/>
