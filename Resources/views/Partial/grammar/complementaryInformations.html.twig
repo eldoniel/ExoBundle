@@ -1,4 +1,9 @@
 <hr>
 <span id="add-complementaryInformation" class="btn btn-default">add-complementaryInformations</span>
 <ul class="list-group complementaryInformations" data-prototype="{{ form_widget(form.interaction.question.complementaryInformations.vars.prototype.media)|e }}">
+    {% for complementaryInformation in form.interaction.question.complementaryInformations %}
+        <li class="list-group-item col-md-12" >
+            {{ form_widget(complementaryInformation.media) }}
+        </li>
+    {% endfor %}
 </ul>
