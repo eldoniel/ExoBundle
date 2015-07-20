@@ -402,7 +402,7 @@ class Question
     public function setComplementaryInformations(ArrayCollection $complementaryInformations)
     {
         foreach ($complementaryInformations as $complementaryInformation) {
-            $this->addContent($complementaryInformation);
+            $this->addComplementaryInformation($complementaryInformation);
         }
         
         return $this;

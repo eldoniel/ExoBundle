@@ -2,6 +2,8 @@
 
 namespace UJM\ExoBundle\Form;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class InteractionQCMHandler extends \UJM\ExoBundle\Form\InteractionHandler
 {
 
@@ -89,7 +91,7 @@ class InteractionQCMHandler extends \UJM\ExoBundle\Form\InteractionHandler
     {
         $originalChoices = array();
         $originalHints = array();
-
+        
         // Create an array of the current Choice objects in the database
         foreach ($originalInterQCM->getChoices() as $choice) {
             $originalChoices[] = $choice;
@@ -123,6 +125,37 @@ class InteractionQCMHandler extends \UJM\ExoBundle\Form\InteractionHandler
         $interQCM = $arg_list[0];
         $originalChoices = $arg_list[1];
         $originalHints = $arg_list[2];
+  
+        // the following allows to save instructions/contents/complementary informations
+        
+        $instructions = new ArrayCollection();
+        $contents = new ArrayCollection();
+        $complementaryInformations = new ArrayCollection();
+        $question = $interQCM->getInteraction()->getQuestion();
+        
+        foreach ($question->getInstructions() as $instruction) {
+            $instructions->add($instruction);
+        }
+        foreach ($question->getContents() as $content) {
+            $contents->add($content);
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            $complementaryInformations->add($complementaryInformation);
+        }
+        
+        for ($i=0; $i<count($instructions); $i++) {
+            $instructions->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($contents); $i++) {
+            $contents->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($complementaryInformations); $i++) {
+            $complementaryInformations->get($i)->setQuestion($question);
+        }
+
+        $question->setInstructions($instructions);
+        $question->setContents($contents);
+        $question->setComplementaryInformations($complementaryInformations);
 
         // filter $originalChoices to contain choice no longer present
         foreach ($interQCM->getChoices() as $choice) {
