@@ -54,12 +54,18 @@ function newHintEdit(label, penalty, addHint, deleteHint) {
         // Add a row to the table
         $('#newTable2').find('tbody').append('<tr></tr>');
 
-         $(this).find('.row').each(function () {
+        $(this).find('.row').each(function () {
 
             // Add the field of type input
             if ($(this).find('input').length) {
                 $('#newTable2').find('tr:last').append('<td class="classic"></td>');
                 $('#newTable2').find('td:last').append($(this).find('input'));
+                
+                // Add the delete button
+                // NicoInnova : J'ai déplacé la création du bouton car
+                // sinon il était créé pour chaque Instruction/Content/ComplementaryInformation
+                $('#newTable2').find('tr:last').append('<td class="classic"></td>');
+                addDelete($('#newTable2').find('td:last'), deleteHint);
             }
 
             // Add the field of type textarea
@@ -72,9 +78,6 @@ function newHintEdit(label, penalty, addHint, deleteHint) {
             $('#hintError').append($(this).find('span'));
         });
 
-        // Add the delete button
-        $('#newTable2').find('tr:last').append('<td class="classic"></td>');
-        addDelete($('#newTable2').find('td:last'), deleteHint);
     });
 
     // Remove the useless fields form
