@@ -1,4 +1,4 @@
---- Instructions ---
+--- {{ 'instructions' | trans({}, 'ujm_exo') }} ---
 
 {% if interactionToDisplayed.interaction.question.instructions != null %}
     {% for instruction in interactionToDisplayed.interaction.question.instructions %}

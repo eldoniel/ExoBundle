@@ -54,9 +54,11 @@ choose_category : Choose a category
 choose_type: Choose type
 color: Color
 comment: Comment
+complementary_informations: Complementary informations
 compose: Answer
 consult_hint: Consult the hint results in a penalty of X points, do you want to continue
 contain_search: Whose question contains
+contents: Contents
 correct: Correct
 correction: Correction
 correction_date: Correction date
@@ -149,6 +151,7 @@ info_exercise_no_puplished: This exercise is not yet published. The administrato
 info_exercise_no_puplished2: This exercise is not yet published. You can't yet compose.
 info_mark: The potential penalties have to be count during your notation
 info_measure_difficulty: This measure doesn't count students that didn't saw the question
+instructions: Instructions
 inter_matching_shuffle: Order of random selection
 interaction_feedback: Feedback to display with the correction (optional)
 interupt: Interupt
