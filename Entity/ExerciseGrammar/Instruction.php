@@ -41,7 +41,7 @@ class Instruction
     
     /**
      * @ORM\ManyToOne(targetEntity="UJM\ExoBundle\Entity\Question", inversedBy="instructions")
-     * @ORM\JoinColumn(name="question_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="question_id", referencedColumnName="id", nullable=true)
      **/
     private $question;
 
@@ -67,7 +67,7 @@ class Instruction
         return $this->question;
     }
     
-    public function setQuestion(Question $question) 
+    public function setQuestion($question) 
     {
         $this->question = $question;
         

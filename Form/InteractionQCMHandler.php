@@ -156,6 +156,24 @@ class InteractionQCMHandler extends \UJM\ExoBundle\Form\InteractionHandler
         $question->setInstructions($instructions);
         $question->setContents($contents);
         $question->setComplementaryInformations($complementaryInformations);
+        
+        foreach ($question->getInstructions() as $instruction) {
+            if ($instruction->getMedia() === null || $instruction->getMedia() === "") {
+                $question->removeInstruction($instruction);
+            }
+        }
+        foreach ($question->getContents() as $content) {
+            if ($content->getMedia() === null || $content->getMedia() === "") {
+                $question->removeContent($content);
+            }
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            if ($complementaryInformation->getMedia() === null || $complementaryInformation->getMedia() === "") {
+                $question->removeComplementaryInformation($complementaryInformation);
+            }
+        }
+        
+        $interQCM->getInteraction()->setQuestion($question);
 
         // filter $originalChoices to contain choice no longer present
         foreach ($interQCM->getChoices() as $choice) {
