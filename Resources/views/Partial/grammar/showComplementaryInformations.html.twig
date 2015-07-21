@@ -1,9 +1,11 @@
---- {{ 'complementary_informations' | trans({}, 'ujm_exo') }} ---
+<h4>{{ 'complementary_informations' | trans({}, 'ujm_exo') }}</h4>
 
 {% if interactionToDisplayed.interaction.question.complementaryInformations != null %}
+    <ul class="list-group">
     {% for complementaryInformation in interactionToDisplayed.interaction.question.complementaryInformations %}
-        <p>{{ complementaryInformation.media | raw }}</p>
+        <li class="list-group-item">{{ complementaryInformation.media | raw }}</li>
     {% endfor %}
+    </ul>
 {% endif %}
 
 <hr/>

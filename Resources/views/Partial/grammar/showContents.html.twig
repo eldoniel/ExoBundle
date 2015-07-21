@@ -1,9 +1,11 @@
---- {{ 'contents' | trans({}, 'ujm_exo') }} ---
+<h4>{{ 'contents' | trans({}, 'ujm_exo') }}</h4>
 
 {% if interactionToDisplayed.interaction.question.contents != null %}
+    <ul class="list-group">
     {% for content in interactionToDisplayed.interaction.question.contents %}
-        <p>{{ content.media | raw }}</p>
+        <li class="list-group-item">{{ content.media | raw }}</li>
     {% endfor %}
+    </ul>
 {% endif %}
 
 <hr/>
