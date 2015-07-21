@@ -2,6 +2,9 @@
 actions: Actions
 add: Ajouter
 add_choice: Ajouter un choix
+add_complementary_information: Ajouter une information complémentaire
+add_content: Ajouter un objet
+add_instruction: Ajouter une consigne
 add_label: Ajouter un label
 add_new_picture: Ajouter une nouvelle image
 add_proposal: Ajouter une proposition

@@ -2,6 +2,9 @@
 actions: Actions
 add: Add
 add_choice: Add a choice
+add_complementary_information: Add a complementary information
+add_content: Add a content
+add_instruction: Add an instruction
 add_label: Add a label
 add_new_picture: Add a new picture
 add_proposal: Add a proposal
