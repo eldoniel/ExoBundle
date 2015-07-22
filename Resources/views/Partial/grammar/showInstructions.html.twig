@@ -1,4 +1,5 @@
-<h4>{{ 'instructions' | trans({}, 'ujm_exo') }}</h4>
+{% if interactionToDisplayed.interaction.question.instructions|length != 0 %}
+    <h4>{{ 'instructions' | trans({}, 'ujm_exo') }}</h4>
 
 {% if interactionToDisplayed.interaction.question.instructions != null %}
     <ul class="list-group">
@@ -9,3 +10,5 @@
 {% endif %}
 
 <hr/>
+
+{% endif %}
