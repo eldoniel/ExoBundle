@@ -47,13 +47,11 @@ function addTagForm(collectionHolder) {
     else {
         // s'il y a déjà des champs ajoutés, on récupère le "__name__" du dernier
         // et l'incrémente de 1 pour créer le suivant
-        var lastFormId = collectionHolder.children().last().children('textarea').attr('id').substring(67,69);
+        var lastFormId = collectionHolder.children().last().children('textarea').attr('id').slice(-7,-5);
         if (lastFormId.substring(1,2) === "_") {
             lastFormId = lastFormId.substring(0,1);
         }
-        console.log(lastFormId);
         newForm = prototype.replace(/__name__/g, parseInt(lastFormId)+1);
-        console.log(newForm);
     }
     var newFormLi = $('<li class="list-group-item col-md-12"></div>').append(newForm);
     collectionHolder.append(newFormLi);
