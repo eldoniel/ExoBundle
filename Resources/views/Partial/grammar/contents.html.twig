@@ -1,4 +1,3 @@
-<hr>
 <span id="add-content" class="btn btn-default">{{ 'add_content' | trans({}, 'ujm_exo') }}</span>
 <ul class="list-group contents" data-prototype="{{ form_widget(form.interaction.question.contents.vars.prototype.media)|e }}">
     {% for content in form.interaction.question.contents %}
@@ -7,3 +6,4 @@
         </li>
     {% endfor %}
 </ul>
+<hr>

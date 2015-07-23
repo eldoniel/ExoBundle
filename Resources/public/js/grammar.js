@@ -48,7 +48,6 @@ function addTagForm(collectionHolder) {
         // s'il y a déjà des champs ajoutés, on récupère le "__name__" du dernier
         // et l'incrémente de 1 pour créer le suivant
         var lastFormId = collectionHolder.children().last().children('textarea').attr('id').slice(-8,-5);
-        console.log(lastFormId);
         if (lastFormId.substring(0,1) === "_") {
             lastFormId = lastFormId.substring(1,2);
         }
