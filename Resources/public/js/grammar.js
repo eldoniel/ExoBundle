@@ -61,7 +61,7 @@ function addTagForm(collectionHolder) {
     addTagFormDeleteLink(newFormLi);
 }
 function addTagFormDeleteLink(tagFormLi) {
-    var $removeFormA = $('<a class="btn btn-danger" href="#" title="Supprimer"><i class="fa fa-close"></i></a>');
+    var $removeFormA = $('<a class="btn btn-danger" href="#" title="Supprimer" style="margin: 5px;"><i class="fa fa-close"></i></a>');
     tagFormLi.append($removeFormA);
     $removeFormA.on('click', function (e) {
         // empêche le lien de créer un « # » dans l'URL
