@@ -3,6 +3,7 @@
 namespace UJM\ExoBundle\Form;
 
 use UJM\ExoBundle\Form\InteractionHandler;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class InteractionMatchingHandler extends InteractionHandler
 {
@@ -140,6 +141,55 @@ class InteractionMatchingHandler extends InteractionHandler
         $originalLabels = $arg_list[1];
         $originalProposals = $arg_list[2];
         $originalHints = $arg_list[3];
+
+        // the following allows to save instructions/contents/complementary informations
+        
+        $instructions = new ArrayCollection();
+        $contents = new ArrayCollection();
+        $complementaryInformations = new ArrayCollection();
+        $question = $interMatching->getInteraction()->getQuestion();
+        
+        foreach ($question->getInstructions() as $instruction) {
+            $instructions->add($instruction);
+        }
+        foreach ($question->getContents() as $content) {
+            $contents->add($content);
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            $complementaryInformations->add($complementaryInformation);
+        }
+        
+        for ($i=0; $i<count($instructions); $i++) {
+            $instructions->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($contents); $i++) {
+            $contents->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($complementaryInformations); $i++) {
+            $complementaryInformations->get($i)->setQuestion($question);
+        }
+
+        $question->setInstructions($instructions);
+        $question->setContents($contents);
+        $question->setComplementaryInformations($complementaryInformations);
+        
+        foreach ($question->getInstructions() as $instruction) {
+            if ($instruction->getMedia() === null || $instruction->getMedia() === "") {
+                $question->removeInstruction($instruction);
+            }
+        }
+        foreach ($question->getContents() as $content) {
+            if ($content->getMedia() === null || $content->getMedia() === "") {
+                $question->removeContent($content);
+            }
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            if ($complementaryInformation->getMedia() === null || $complementaryInformation->getMedia() === "") {
+                $question->removeComplementaryInformation($complementaryInformation);
+            }
+        }
+        
+        $interMatching->getInteraction()->setQuestion($question);
 
         $proposals = $interMatching->getProposals();
         $indLabel = 1;
