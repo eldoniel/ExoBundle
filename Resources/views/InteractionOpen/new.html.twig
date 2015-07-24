@@ -8,6 +8,9 @@
     <form onsubmit="return checkFormOpen();" id="formOpen" action="{{ path('ujm_interactionopen_create') }}" method="post" {{ form_enctype(form) }}>
 
         <div class="panel-body">
+            {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
             {% include "UJMExoBundle:Partial:question.html.twig" %}
             {% include "UJMExoBundle:Partial:interactions/open.html.twig" %}
             {% include "UJMExoBundle:Partial:model.html.twig" %}
@@ -25,6 +28,7 @@
 <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/interactionOpen.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/category_pop.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/hint.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/ujmexo/js/grammar.js') }}"></script>
 {% include "UJMExoBundle:Partial:modal/confirmOneWord.html.twig" %}
 {# functions javascript #}
 {% if error is defined %}
