@@ -3,6 +3,7 @@
 namespace UJM\ExoBundle\Form;
 
 use UJM\ExoBundle\Entity\Coords;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class InteractionGraphicHandler extends \UJM\ExoBundle\Form\InteractionHandler
 {
@@ -129,6 +130,55 @@ class InteractionGraphicHandler extends \UJM\ExoBundle\Form\InteractionHandler
         $arg_list = func_get_args();
         $interGraphic = $arg_list[0];
         $originalHints = $arg_list[1];
+        
+        // the following allows to save instructions/contents/complementary informations
+        
+        $instructions = new ArrayCollection();
+        $contents = new ArrayCollection();
+        $complementaryInformations = new ArrayCollection();
+        $question = $interGraphic->getInteraction()->getQuestion();
+        
+        foreach ($question->getInstructions() as $instruction) {
+            $instructions->add($instruction);
+        }
+        foreach ($question->getContents() as $content) {
+            $contents->add($content);
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            $complementaryInformations->add($complementaryInformation);
+        }
+        
+        for ($i=0; $i<count($instructions); $i++) {
+            $instructions->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($contents); $i++) {
+            $contents->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($complementaryInformations); $i++) {
+            $complementaryInformations->get($i)->setQuestion($question);
+        }
+
+        $question->setInstructions($instructions);
+        $question->setContents($contents);
+        $question->setComplementaryInformations($complementaryInformations);
+        
+        foreach ($question->getInstructions() as $instruction) {
+            if ($instruction->getMedia() === null || $instruction->getMedia() === "") {
+                $question->removeInstruction($instruction);
+            }
+        }
+        foreach ($question->getContents() as $content) {
+            if ($content->getMedia() === null || $content->getMedia() === "") {
+                $question->removeContent($content);
+            }
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            if ($complementaryInformation->getMedia() === null || $complementaryInformation->getMedia() === "") {
+                $question->removeComplementaryInformation($complementaryInformation);
+            }
+        }
+        
+        $interGraphic->getInteraction()->setQuestion($question);
 
         $width = $this->request->get('imagewidth'); // Get the width of the image
         $height = $this->request->get('imageheight'); // Get the height of the image

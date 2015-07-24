@@ -15,6 +15,9 @@
         <div class="panel-body">
             {% set src = 'new' %}
 
+            {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
             {% include "UJMExoBundle:Partial:question.html.twig" %}
             {% include "UJMExoBundle:Partial:interactions/graphic.html.twig" %}
             {% include "UJMExoBundle:Partial:model.html.twig" %}
@@ -38,6 +41,7 @@
 <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/instructions.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/graphic.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/ext/malsup.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/ujmexo/js/grammar.js') }}"></script>
 
 
 {# ---------------------------------------------- Javascript ------------------------------------------------------- #}
