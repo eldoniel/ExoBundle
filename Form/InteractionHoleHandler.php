@@ -2,6 +2,8 @@
 
 namespace UJM\ExoBundle\Form;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class InteractionHoleHandler extends \UJM\ExoBundle\Form\InteractionHandler{
 
     protected $validator;
@@ -148,6 +150,55 @@ class InteractionHoleHandler extends \UJM\ExoBundle\Form\InteractionHandler{
         $interHole = $arg_list[0];
         $originalHoles = $arg_list[1];
         $originalHints = $arg_list[2];
+        
+        // the following allows to save instructions/contents/complementary informations
+        
+        $instructions = new ArrayCollection();
+        $contents = new ArrayCollection();
+        $complementaryInformations = new ArrayCollection();
+        $question = $interHole->getInteraction()->getQuestion();
+        
+        foreach ($question->getInstructions() as $instruction) {
+            $instructions->add($instruction);
+        }
+        foreach ($question->getContents() as $content) {
+            $contents->add($content);
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            $complementaryInformations->add($complementaryInformation);
+        }
+        
+        for ($i=0; $i<count($instructions); $i++) {
+            $instructions->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($contents); $i++) {
+            $contents->get($i)->setQuestion($question);
+        }
+        for ($i=0; $i<count($complementaryInformations); $i++) {
+            $complementaryInformations->get($i)->setQuestion($question);
+        }
+
+        $question->setInstructions($instructions);
+        $question->setContents($contents);
+        $question->setComplementaryInformations($complementaryInformations);
+        
+        foreach ($question->getInstructions() as $instruction) {
+            if ($instruction->getMedia() === null || $instruction->getMedia() === "") {
+                $question->removeInstruction($instruction);
+            }
+        }
+        foreach ($question->getContents() as $content) {
+            if ($content->getMedia() === null || $content->getMedia() === "") {
+                $question->removeContent($content);
+            }
+        }
+        foreach ($question->getComplementaryInformations() as $complementaryInformation) {
+            if ($complementaryInformation->getMedia() === null || $complementaryInformation->getMedia() === "") {
+                $question->removeComplementaryInformation($complementaryInformation);
+            }
+        }
+        
+        $interHole->getInteraction()->setQuestion($question);
 
         // to avoid bug with code tinymce
         $htmlTiny = $interHole->getHtml();

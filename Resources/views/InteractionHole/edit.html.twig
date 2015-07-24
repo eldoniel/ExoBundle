@@ -44,6 +44,9 @@
             <div class="panel-body">
                 {% set form = edit_form %}
 
+                {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
+                {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
+                {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
                 {% include "UJMExoBundle:Partial:questionEdit.html.twig" %}
                 {% include "UJMExoBundle:Partial:interactions/hole.html.twig" %}
                 {% include "UJMExoBundle:Partial:model.html.twig" %}
@@ -78,6 +81,7 @@
     <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/hint.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/category_pop.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/allQuestionsType.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/ujmexo/js/grammar.js') }}"></script>
 
     {# add form choice #}
     <script type="text/javascript">
