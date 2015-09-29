@@ -11,9 +11,6 @@
           action="{{ path('ujm_interactionmatching_create') }}" method="post" {{ form_enctype(form) }}>
 
         <div class="panel-body">
-            {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
-            {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
-            {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
             {% include "UJMExoBundle:Partial:question.html.twig" %}
             {% include "UJMExoBundle:Partial:interactions/matching.html.twig" %}
             {% include "UJMExoBundle:Partial:model.html.twig" %}

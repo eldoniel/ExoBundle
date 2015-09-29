@@ -6,6 +6,9 @@
         <a id="idDescriptionButton" class="btn btn-default" data-toggle="collapse" data-target="#descriptionDiv" onClick="statusButton('idDescription','descriptionDiv');" ><i id="idDescription" class=""></i>&nbsp;{{'description' | trans({}, 'ujm_exo') }}</a>
         {{ form_errors(form.interaction.question.category) }}
     </div>
+    {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
+    {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
+    {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
    <div id="categoryDiv" class="form-group row collapse">
          <label class="control-label col-md-1">{{ 'category' | trans({}, 'ujm_exo') }}</label>
         <div class="col-md-5">

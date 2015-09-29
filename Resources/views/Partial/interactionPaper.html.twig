@@ -1,5 +1,9 @@
 <p><h4>{{ interactionToDisplayed.interaction.question.title }}</h4></p>
 
+            {% include "UJMExoBundle:Partial:grammar/showInstructions.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/showContents.html.twig" %}
+            {% include "UJMExoBundle:Partial:grammar/showComplementaryInformations.html.twig" %}
+
 {% if interactionToDisplayed.interaction.question.description != null %}
     <p>{{ interactionToDisplayed.interaction.question.description|raw }}<p/>
     <hr/>

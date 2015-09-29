@@ -2,9 +2,9 @@
 actions: Actions
 add: Ajouter
 add_choice: Ajouter un choix
-add_complementary_information: Ajouter une information complémentaire
-add_content: Ajouter un objet
-add_instruction: Ajouter une consigne
+add_complementary_information: + Information complémentaire
+add_content: + Objet de la question
+add_instruction: + Consigne pédagogique
 add_label: Ajouter un label
 add_new_picture: Ajouter une nouvelle image
 add_proposal: Ajouter une proposition
@@ -54,11 +54,11 @@ choose_category : Choisir une catégorie
 choose_type: Choisir un type
 color: Couleur
 comment: Commentaire
-complementary_informations: Informations complémentaires
+complementary_informations: Ajouter une information complémentaire
 compose: Répondre
 consult_hint: Consulter l\'indice entraîne une pénalité de X points, voulez vous continuer
 contain_search: Dont la question contient
-contents: Objets de la question
+contents: Objet de la question
 correct: Correcte
 correction: Correction
 correction_date: Date de la correction
@@ -151,7 +151,7 @@ info_exercise_no_puplished: Cet exercice n'est pas encore publié. Les gestionna
 info_exercise_no_puplished2: Cet exercice n'est pas encore publié. Vous ne pouvez pas encore répondre.
 info_mark: Les éventuelles pénalités sont à prendre en compte dans votre notation
 info_measure_difficulty: Cet indice ne prend pas en compte les étudiants n'ayant pas vu la question
-instructions: Consignes
+instructions: Consigne pédagogique
 inter_matching_shuffle: Ordre des propositions et des labels aléatoire
 interaction_feedback: Commentaire à afficher avec la correction (facultatif)
 interupt: Interrompre

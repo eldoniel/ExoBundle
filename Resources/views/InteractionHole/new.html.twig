@@ -7,9 +7,6 @@
 
     <form onsubmit="return check_form('{{ 'nb_hole' | trans({}, 'ujm_exo') }}')" action="{{ path('ujm_interactionhole_create') }}" method="post" {{ form_enctype(form) }}>
         <div class="panel-body">
-            {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
-            {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
-            {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
             {% include "UJMExoBundle:Partial:question.html.twig" %}
             {% include "UJMExoBundle:Partial:interactions/hole.html.twig" %}
             {% include "UJMExoBundle:Partial:model.html.twig" %}
