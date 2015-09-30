@@ -114,8 +114,10 @@
         {% for interactionID in tabOrderInter %}
             {% set indexMax = loop.index %}
         {% endfor %}
+        
+        <span id="set-feedback" class="btn btn-primary" style="margin-bottom: 5px;">{{ 'feedback' | trans({}, 'ujm_exo') }}</span>
 
-        <ul class="pagination">
+        <ul class="pagination" style="display: none;">
 
             {% if numQ == indexMax and numQ == 1 %}
                 <li>
@@ -181,6 +183,15 @@
 {% endblock %}
 
 {% block javascripts %}
+    
+    <script type="text/javascript">
+        $('#set-feedback').on('click', function(e) {
+            $(".feedback-column").show();
+            
+            $(".pagination").show();
+            $("#set-feedback").hide();
+        });
+    </script>
     
     <script type="text/javascript">
         //$(document).ready(function() {
