@@ -34,6 +34,18 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    var collectionHolder = $('ul.functionalInstructions');
+    collectionHolder.find('li').each(function () {
+        addTagFormDeleteLink($(this));
+    });
+
+    $("#add-functionalInstruction").on('click', function (e) {
+        e.preventDefault();
+        addTagForm(collectionHolder);
+    });
+});
+
 function addTagForm(collectionHolder) {
     // Récupère l'élément ayant l'attribut data-prototype comme expliqué plus tôt
     var prototype = collectionHolder.attr('data-prototype');

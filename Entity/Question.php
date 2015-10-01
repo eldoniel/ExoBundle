@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use UJM\ExoBundle\Entity\ExerciseGrammar\Instruction;
 use UJM\ExoBundle\Entity\ExerciseGrammar\Content;
 use UJM\ExoBundle\Entity\ExerciseGrammar\ComplementaryInformation;
+use UJM\ExoBundle\Entity\ExerciseGrammar\FunctionalInstruction;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -110,6 +111,11 @@ class Question
      * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\ComplementaryInformation", mappedBy="question", cascade={"persist","remove"})
      */
     private $complementaryInformations;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\ExerciseGrammar\FunctionalInstruction", mappedBy="question", cascade={"persist","remove"})
+     */
+    private $functionalInstructions;
 
     /**
      * Constructs a new instance of Expertises / Documents
@@ -122,6 +128,7 @@ class Question
         $this->instructions = new ArrayCollection();
         $this->contents = new ArrayCollection();
         $this->complementaryInformations = new ArrayCollection();
+        $this->functionalInstructions = new ArrayCollection();
     }
 
     /**
@@ -342,6 +349,53 @@ class Question
         if ($this->instructions->contains($instruction)) {
             $this->instructions->removeElement($instruction);
             $instruction->setQuestion(null);
+        }
+        
+        return $this;
+    }
+    
+    public function getFunctionalInstructions()
+    {
+        return $this->functionalInstructions;
+    }
+    
+    public function setFunctionalInstructions(ArrayCollection $functionalInstructions)
+    {
+        foreach ($functionalInstructions as $functionalInstruction) {
+            $this->addFunctionalInstruction($functionalInstruction);
+        }
+        
+        return $this;
+    }
+    
+    public function addFunctionalInstruction(FunctionalInstruction $functionalInstruction)
+    {
+        if (!$this->functionalInstructions->contains($functionalInstruction)) {
+            $this->functionalInstructions->add($functionalInstruction);
+            $functionalInstruction->setQuestion($this);
+        }
+        
+        return $this;
+    }
+    
+    
+    public function addFunctionalInstructions(ArrayCollection $functionalInstructions)
+    {
+        foreach ($functionalInstructions as $functionalInstruction) {
+            if (!$this->functionalInstructions->contains($functionalInstruction)) {
+                $this->functionalInstructions->add($functionalInstruction);
+                $functionalInstruction->setQuestion($this);
+            }
+        }
+        
+        return $this;
+    }
+    
+    public function removeFunctionalInstruction(FunctionalInstruction $functionalInstruction)
+    {
+        if ($this->functionalInstructions->contains($functionalInstruction)) {
+            $this->functionalInstructions->removeElement($functionalInstruction);
+            $functionalInstruction->setQuestion(null);
         }
         
         return $this;

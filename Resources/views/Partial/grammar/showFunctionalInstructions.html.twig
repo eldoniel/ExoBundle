@@ -1,0 +1,13 @@
+{% if interactionToDisplayed.interaction.question.functionalInstructions|length != 0 %}
+
+{% if interactionToDisplayed.interaction.question.functionalInstructions != null %}
+    <ul class="list-group">
+    {% for functionalInstruction in interactionToDisplayed.interaction.question.functionalInstructions %}
+        <li class="list-group-item">{{ functionalInstruction.media | raw }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<hr/>
+
+{% endif %}

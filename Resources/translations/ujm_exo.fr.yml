@@ -4,6 +4,7 @@ add: Ajouter
 add_choice: Ajouter un choix
 add_complementary_information: + Information complémentaire
 add_content: + Objet de la question
+add_functional_instruction: + Consigne fonctionnelle
 add_instruction: + Consigne pédagogique
 add_label: Ajouter un label
 add_new_picture: Ajouter une nouvelle image

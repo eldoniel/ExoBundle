@@ -1,0 +1,28 @@
+<?php
+
+namespace UJM\ExoBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class FunctionalInstructionType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('media', 'tinymce', array ('required' => true));
+        $builder->add('position', 'hidden', array('data' => 1));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array (
+            'data_class' => 'UJM\ExoBundle\Entity\ExerciseGrammar\FunctionalInstruction',
+        ));
+    }
+    
+    public function getName()
+    {
+        return 'ujm_exo_functional_instruction';
+    }
+}
