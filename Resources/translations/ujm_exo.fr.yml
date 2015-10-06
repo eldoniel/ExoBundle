@@ -54,7 +54,7 @@ choose_image : Choisir une image
 choose_category : Choisir une catégorie
 choose_type: Choisir un type
 color: Couleur
-comment: Commentaire
+comment: Feedback spécifique
 complementary_informations: Ajouter une information complémentaire
 compose: Répondre
 consult_hint: Consulter l\'indice entraîne une pénalité de X points, voulez vous continuer
@@ -113,7 +113,7 @@ export_csv_results: Export CSV des résultats
 export_qti_exercise : Exporter les questions de l'exercice au format QTI
 
 # F
-feedback: Feedback général
+feedback: Valider
 feedback_answer_check: Commentaire si la réponse est selectionnée(facultatif)
 find_by: Trouver par
 find_in: Trouver dans
@@ -253,7 +253,7 @@ partially: Partiellement correcte
 penalty: Pénalité
 percentage: Pourcentage
 picture_name: Nom de l'image
-points: Points
+points: Score
 point_answer: Vous devez assigner un point à la réponse attendue
 point_answers: Vous devez assigner un point à chaque réponse
 position: => Positionner le(s) pointeur(s) ci-dessous (croix rouge) sur l'image. La position du centre du pointeur défini votre réponse.
