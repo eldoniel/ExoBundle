@@ -17,6 +17,7 @@
                 <td><p><INPUT type="checkbox" name="choice[]" value="{{ choice.id }}" {{ checked }}/></p></td>
                     {% endif %}
             <td>{{ choice.label|raw }}</td>
+            <td class="feedback-column" style="display: none;">{{ choice.feedback }}</td>
         </tr>
     {% endfor %}
 </table>
