@@ -1,7 +1,7 @@
 # A
 actions: Actions
 add: Ajouter
-add_choice: Ajouter un choix
+add_choice: Proposition de réponse
 add_complementary_information: + Information complémentaire
 add_content: + Objet de la question
 add_functional_instruction: + Consigne fonctionnelle
@@ -113,7 +113,8 @@ export_csv_results: Export CSV des résultats
 export_qti_exercise : Exporter les questions de l'exercice au format QTI
 
 # F
-feedback: Valider
+feedback: Commentaire général
+feedback_get: Valider
 feedback_answer_check: Commentaire si la réponse est selectionnée(facultatif)
 find_by: Trouver par
 find_in: Trouver dans
