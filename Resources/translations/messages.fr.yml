@@ -45,7 +45,7 @@ cercle: Cercle
 change: Changer
 change_name: Changer le nom du document
 change_order: Pour changer l'ordre des questions, déplacez-les en utilisant le glisser/déposer
-choice: Choix
+choice: Proposition de réponse
 choose_image : Choisir une image
 choose_category : Choisir une catégorie
 choose_type: Choisir un type
@@ -291,7 +291,7 @@ right_response: Points pour la bonne réponse
 save: Enregistrer
 save_order: Enregistrer le nouvel ordre
 score: Score
-score_answer: Points pour cette réponse
+score_answer: Score pour cette réponse
 score_list_question: Note et liste des questions
 score_error: Attention, le score doit être un chiffre !
 score_max : Score maximum possible
