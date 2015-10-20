@@ -21,6 +21,8 @@
         </tr>
     {% endfor %}
 </table>
+                
+{% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
 
 <span class="general-feedback" style="display: none;">{{ interactionToDisplayed.interaction.feedback|raw }}</span>
 
