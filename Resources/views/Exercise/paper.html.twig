@@ -186,7 +186,6 @@
     
     <script type="text/javascript">
         $('#set-feedback').on('click', function(e) {
-            $(".feedback-column").show();
             $(".general-feedback").show();
             
             $(".pagination").show();
@@ -205,13 +204,8 @@
             console.log(inputs);
             var img, result_img;
             for (index = 0; index < inputs.length; ++index) {
-                console.log(inputs[index].value);
                 img = document.getElementById('img' + inputs[index].value);
                 result_img = document.getElementById('resultimg' + inputs[index].value);
-                
-                console.log(img.src.substr(-6,2));
-                console.log(result_img.src.substr(-6,2));
-                
                 if (result_img.src.substr(-6,2) === "on" && inputs[index].checked) {
                     document.getElementById('img' + inputs[index].value).src = img.src.replace("off.gif", "on.gif");
                 }
