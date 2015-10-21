@@ -12,9 +12,9 @@
                 {% set checked = "checked" %}
             {% endif %}
             {% if interactionToDisplayed.typeQCM.code == 2 %}
-                <td><p><INPUT type="radio" name="choice" value="{{ choice.id }}" {{ checked }}/></p></td>
+                <td><p><INPUT type="radio" name="choice" value="{{ choice.id }}" {{ checked }} id="input{{ choice.id }}" /></p></td>
                     {% else %}
-                <td><p><INPUT type="checkbox" name="choice[]" value="{{ choice.id }}" {{ checked }}/></p></td>
+                <td><p><INPUT type="checkbox" name="choice[]" value="{{ choice.id }}" {{ checked }} id="input{{ choice.id }}" /></p></td>
                     {% endif %}
             <td>{{ choice.label|raw }}</td>
         </tr>

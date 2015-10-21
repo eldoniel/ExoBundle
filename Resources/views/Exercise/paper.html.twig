@@ -201,7 +201,7 @@
             else {
                 inputs = inputs2;
             }
-            console.log(inputs);
+            
             var img, result_img;
             for (index = 0; index < inputs.length; ++index) {
                 img = document.getElementById('img' + inputs[index].value);
@@ -212,6 +212,8 @@
                 else if (result_img.src.substr(-6,2) === "ff" && inputs[index].checked) {
                     document.getElementById('img' + inputs[index].value).src = img.src.replace("off.gif", "on_red.gif");
                 }
+                
+                document.getElementById(inputs[index].id).disabled = true;
             }
         });
     </script>
