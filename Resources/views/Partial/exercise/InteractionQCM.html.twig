@@ -24,6 +24,53 @@
                 
 {% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
 
+<table border="1" class="table table-striped table-bordered table-condensed general-feedback" style="display: none;">
+    <tr>
+        <th class="classic">{{ 'choice' | trans({}, 'ujm_exo') }}</th>
+        <th class="classic">{{ 'expected_answer' | trans({}, 'ujm_exo') }}</th>
+        <th class="classic">{{ 'your_answer' | trans({}, 'ujm_exo') }}</th>
+        <th class="classic">{{ 'feedback' | trans({}, 'ujm_exo') }}</th>
+    </tr>
+
+    {% for choice in interactionToDisplayed.choices %}
+        <tr>
+            <td class="classic">
+                {{ choice.label|raw }}
+            </td>
+            <td class="classic">
+                {% if choice.rightResponse %}
+                    <img src="{{ asset('bundles/ujmexo/images/checkbox_on.gif') }}" id="resultimg{{ choice.id }}">
+                {% else %}
+                    <img src="{{ asset('bundles/ujmexo/images/checkbox_off.gif') }}" id="resultimg{{ choice.id }}">
+                {% endif %}
+            </td>
+            <td class="classic">
+            {#    {% if response is not defined %}
+                    {% set response = responses[p].response %}
+                {% endif %}#}
+                {% if regexTwig('/' ~ choice.id ~ ';/', response) > 0 %}
+                    {# choice checked by student #}
+                    {% if choice.rightResponse %}
+                        <img src="{{ asset('bundles/ujmexo/images/checkbox_on.gif') }}" id="img{{ choice.id }}">
+                    {% else %}
+                        <img src="{{ asset('bundles/ujmexo/images/checkbox_on_red.gif') }}" id="img{{ choice.id }}">
+                    {% endif %}
+                {% else %}
+                    <img src="{{ asset('bundles/ujmexo/images/checkbox_off.gif') }}" id="img{{ choice.id }}">
+                {% endif %}
+            </td>
+            <td class="classic">
+                {% if choice.feedback is not empty %}
+                    {{ choice.feedback|raw }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
 <span class="general-feedback" style="display: none;">{{ interactionToDisplayed.interaction.feedback|raw }}</span>
 
 {% include "UJMExoBundle:Partial:hintPaper.html.twig" %}
