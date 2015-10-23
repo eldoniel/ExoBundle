@@ -191,6 +191,16 @@
             $(".pagination").show();
             $("#set-feedback").hide();
             
+            if (document.getElementById('type_question').value === "qcm") {
+                getQcmFeedback();
+            }
+            else if (document.getElementById('type_question').value === "hole") {
+                console.log('hole');
+                getHoleFeedback();
+            }
+        });
+        
+        function getQcmFeedback() {
             var inputs, index;
 
             var inputs1 = document.getElementsByName('choice');
@@ -215,7 +225,32 @@
                 
                 document.getElementById(inputs[index].id).disabled = true;
             }
-        });
+        }
+        
+        function getHoleFeedback() {
+            var exists = true;
+            var inputs;
+            var i=1;
+            while (exists) {
+                inputs = document.getElementsByName('blank_' + i);
+                console.log(inputs);
+                
+                if (inputs[0].value === inputs[1].value) {
+                    document.getElementsByName('blank_' + i)[0].style.color = "#00E900";
+                }
+                else {
+                    document.getElementsByName('blank_' + i)[0].style.color = "#F30000";
+                }
+                
+                document.getElementsByName('blank_' + i)[1].style.color = "#2289B5";
+                
+                i++;
+                
+                if (document.getElementsByName('blank_' + i).length === 0) {
+                    exists = false;
+                }
+            }
+        }
     </script>
     
     <script type="text/javascript">

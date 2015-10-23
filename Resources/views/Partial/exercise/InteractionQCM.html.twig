@@ -4,6 +4,7 @@
 
 {% include "UJMExoBundle:Partial:interactionPaper.html.twig" %}
 
+<input type="hidden" id="type_question" value="qcm" />
 <table class="table-striped" cellspacing="5" cellpadding="2" border="0">
     {% for choice in interactionToDisplayed.choices %}
         {% set checked = "" %}
