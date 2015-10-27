@@ -239,20 +239,31 @@
             while (exists) {
                 inputs = document.getElementsByName('blank_' + i);
                 console.log(inputs);
+                console.log(inputs[0].nodeName);
                 
-                if (inputs[0].value === inputs[1].value) {
-                    document.getElementsByName('blank_' + i)[0].style.color = "#00E900";
+                if (inputs[0].nodeName === "INPUT") {
+                    if (inputs[0].value === inputs[1].value) {
+                        document.getElementsByName('blank_' + i)[0].style.color = "#00E900";
+                    }
+                    else {
+                        document.getElementsByName('blank_' + i)[0].style.color = "#F30000";
+                    }
                 }
                 else {
-                    document.getElementsByName('blank_' + i)[0].style.color = "#F30000";
+                    if (inputs[0].options[inputs[0].selectedIndex].text === inputs[1].value) {
+                        document.getElementsByName('blank_' + i)[0].style.color = "#00E900";
+                    }
+                    else {
+                        document.getElementsByName('blank_' + i)[0].style.color = "#F30000";
+                    }
                 }
-                
+
                 document.getElementsByName('blank_' + i)[1].style.color = "#2289B5";
                 document.getElementsByName('blank_' + i)[0].disabled = true;
                 document.getElementsByName('blank_' + i)[1].disabled = true;
-                
+
                 i++;
-                
+
                 if (document.getElementsByName('blank_' + i).length === 0) {
                     exists = false;
                 }
