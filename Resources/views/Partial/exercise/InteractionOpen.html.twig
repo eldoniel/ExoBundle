@@ -10,5 +10,7 @@
 
 {% include "UJMExoBundle:Partial:hintPaper.html.twig" %}
 
+<span class="general-feedback" style="display: none;">{{ interactionToDisplayed.interaction.feedback|raw }}</span>
+
 <input type="hidden" name="testOpen" value="testOpen" />
 <input type="hidden" name="interaction" value="{{ interactionToDisplayed.id }}"/>
