@@ -200,6 +200,9 @@
             else if (document.getElementById('type_question').value === "graph") {
                 getGraphFeedback();
             }
+            else if (document.getElementById('type_question').value === "match") {
+                getMatchFeedback();
+            }
         });
         
         function getQcmFeedback() {
@@ -257,12 +260,14 @@
         }
         
         function getGraphFeedback() {
+            {% if interactionToDisplayed.interaction.type == "InteractionGraphic" %}
             var coords = "{{ interactionToDisplayed.coords[0].value }}".split(",");
             var width = {{ interactionToDisplayed.width }};
             var height = {{ interactionToDisplayed.height }};
             var shape = "{{ interactionToDisplayed.coords[0].shape }}";
             var color = "{{ interactionToDisplayed.coords[0].color }}";
             var size = {{ interactionToDisplayed.coords[0].size }};
+            {% endif %}
             
             var imgsAnswer = document.getElementsByClassName("AnswerImage");
             
@@ -373,6 +378,10 @@
             document.getElementById("Answer").appendChild(p);
             
             document.getElementsByClassName("AnswerImage ui-draggable").className = "AnswerImage";
+        }
+        
+        function getMatchFeedback() {
+            
         }
     </script>
     
