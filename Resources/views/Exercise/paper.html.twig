@@ -195,8 +195,10 @@
                 getQcmFeedback();
             }
             else if (document.getElementById('type_question').value === "hole") {
-                console.log('hole');
                 getHoleFeedback();
+            }
+            else if (document.getElementById('type_question').value === "graph") {
+                getGraphFeedback();
             }
         });
         
@@ -252,6 +254,126 @@
                     exists = false;
                 }
             }
+        }
+        
+        function getGraphFeedback() {
+            var coords = "{{ interactionToDisplayed.coords[0].value }}".split(",");
+            var width = {{ interactionToDisplayed.width }};
+            var height = {{ interactionToDisplayed.height }};
+            var shape = "{{ interactionToDisplayed.coords[0].shape }}";
+            var color = "{{ interactionToDisplayed.coords[0].color }}";
+            var size = {{ interactionToDisplayed.coords[0].size }};
+            
+            var imgsAnswer = document.getElementsByClassName("AnswerImage");
+            
+            for (var i=0; i<imgsAnswer.length; i++) {
+                if (imgsAnswer[i].src.substr(-10,10) === "answer.png") {
+                    var urlImg = imgsAnswer[i].src.split("answer.png")[0];
+                    console.log(urlImg);
+                }
+            }
+            
+            var img = document.createElement("IMG");
+            var p = document.createElement("P");
+            
+            if (shape == 'circle') {
+                switch (color) {
+                case 'black' :
+                    url = urlImg + 'circleblack.png';
+                    break;
+                case 'white' :
+                    url = urlImg + 'circlew.png';
+                    break;
+
+                case 'red' :
+                    url = urlImg + 'circler.png';
+                    break;
+
+                case 'blue' :
+                    url = urlImg + 'circleb.png';
+                    break;
+
+                case 'purple' :
+                    url = urlImg + 'circlep.png';
+                    break;
+
+                case 'green' :
+                    url = urlImg + 'circleg.png';
+                    break;
+
+                case 'orange' :
+                    url = urlImg + 'circleo.png';
+                    break;
+
+                case 'yellow' :
+                    url = urlImg + 'circley.png';
+                    break;
+                case 'brown' :
+                    url = urlImg + 'circlebrown.png';
+                     break;
+                default :
+                    url = urlImg + 'circleblack.png';
+                    break;
+                }
+
+            } else if (shape == 'square') {
+                switch (color) {
+                case 'black' :
+                    url = urlImg + 'squareblack.png';
+                    break;
+
+                case 'white' :
+                    url = urlImg + 'squarew.png';
+                    break;
+
+                case 'red' :
+                    url = urlImg + 'squarer.png';
+                    break;
+
+                case 'blue' :
+                    url = urlImg + 'squareb.png';
+                    break;
+
+                case 'purple' :
+                    url = urlImg + 'squarep.png';
+                    break;
+
+                case 'green' :
+                    url = urlImg + 'squareg.png';
+                    break;
+
+                case 'orange' :
+                    url = urlImg + 'squareo.png';
+                    break;
+
+                case 'yellow' :
+                    url = urlImg + 'squarey.png';
+                    break;
+
+                case 'brown' :
+                    url = urlImg + 'squarebrown.png';
+                    break;
+
+                default :
+                     url = urlImg + 'squareblack.png';
+                }
+            }
+            
+            img.src = url;
+            img.height = size;
+            img.width = size;
+            img.style.width = size + 'px';
+            img.style.height = size + 'px';
+            img.style.left = coords[0] + 'px';
+            img.style.top = coords[1] + 'px';
+            img.style.position = "absolute";
+            img.style.marginTop = "30px";
+            
+            p.appendChild(img);
+            
+            console.log(img);
+            
+            document.getElementById("Answer").appendChild(p);
         }
     </script>
     

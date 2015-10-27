@@ -8,6 +8,9 @@
         {{ "only_once" | trans({}, 'ujm_exo') }}</em>
 </h6>
 </div>
+{% for coord in interactionToDisplayed.coords %}
+{{ coord.value }} -
+{% endfor %}
 <div style="margin-left: 30px;">
     <div style="position: relative;" id="Answer">
         <p id="ContainerCursorPaper">
@@ -30,6 +33,7 @@
         </p>
     </div>
 
+    <input type="hidden" id="type_question" value="graph" />
     <input type="hidden" id="nbpointer" name="nbpointer" value="{{ i }}"/>
     <input type="hidden" id="answers" name="answers" value=""/>
     <input type="hidden" id="graphId" name="graphId" value="{{ interactionToDisplayed.id }}"/>
