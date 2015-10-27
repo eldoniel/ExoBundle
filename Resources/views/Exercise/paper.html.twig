@@ -269,7 +269,6 @@
             for (var i=0; i<imgsAnswer.length; i++) {
                 if (imgsAnswer[i].src.substr(-10,10) === "answer.png") {
                     var urlImg = imgsAnswer[i].src.split("answer.png")[0];
-                    console.log(urlImg);
                 }
             }
             
@@ -371,9 +370,9 @@
             
             p.appendChild(img);
             
-            console.log(img);
-            
             document.getElementById("Answer").appendChild(p);
+            
+            document.getElementsByClassName("AnswerImage ui-draggable").className = "AnswerImage";
         }
     </script>
     
