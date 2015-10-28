@@ -261,9 +261,19 @@
                     }
                 }
 
-                document.getElementsByName('blank_' + i)[1].style.color = "#2289B5";
+                document.getElementsByName('blank_' + i)[1].style.color = "#2289B5";/*
                 document.getElementsByName('blank_' + i)[0].disabled = true;
-                document.getElementsByName('blank_' + i)[1].disabled = true;
+                document.getElementsByName('blank_' + i)[1].disabled = true;*/
+                    /*
+                document.getElementsByName('blank_' + i)[1].setAttribute('class', "answer");
+                document.getElementsByName('blank_' + i)[1].removeAttribute('id');
+                document.getElementsByName('blank_' + i)[1].setAttribute('name', "answer_" + i);*/
+                
+                var newElement = document.createElement("span");
+                var oldElement = document.getElementsByName('blank_' + i)[1];
+                newElement.innerHTML = " " + document.getElementsByName('blank_' + i)[1].value + " ";
+                newElement.style.color = "#2289B5";
+                oldElement.parentNode.replaceChild(newElement, oldElement);
 
                 i++;
 
