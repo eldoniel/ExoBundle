@@ -45,19 +45,7 @@
                 {% endif %}
             </td>
             <td class="classic">
-            {#    {% if response is not defined %}
-                    {% set response = responses[p].response %}
-                {% endif %}#}
-                {% if regexTwig('/' ~ choice.id ~ ';/', response) > 0 %}
-                    {# choice checked by student #}
-                    {% if choice.rightResponse %}
-                        <img src="{{ asset('bundles/ujmexo/images/checkbox_on.gif') }}" id="img{{ choice.id }}">
-                    {% else %}
-                        <img src="{{ asset('bundles/ujmexo/images/checkbox_on_red.gif') }}" id="img{{ choice.id }}">
-                    {% endif %}
-                {% else %}
-                    <img src="{{ asset('bundles/ujmexo/images/checkbox_off.gif') }}" id="img{{ choice.id }}">
-                {% endif %}
+                <img src="{{ asset('bundles/ujmexo/images/checkbox_off.gif') }}" id="img{{ choice.id }}">
             </td>
             <td class="classic">
                 {% if choice.feedback is not empty %}
