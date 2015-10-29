@@ -30,9 +30,14 @@
         </p>
     </div>
 
+    <input type="hidden" id="type_question" value="graph" />
     <input type="hidden" id="nbpointer" name="nbpointer" value="{{ i }}"/>
     <input type="hidden" id="answers" name="answers" value=""/>
     <input type="hidden" id="graphId" name="graphId" value="{{ interactionToDisplayed.id }}"/>
+                
+{% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
+
+<span class="general-feedback" style="display: none;">{{ interactionToDisplayed.interaction.feedback|raw }}</span>
 
     {% include "UJMExoBundle:Partial:hintPaper.html.twig" %}
 </div>
