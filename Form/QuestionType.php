@@ -59,6 +59,13 @@ class QuestionType extends AbstractType
                     // 'by_reference' => false
                 )
             )
+            ->add('functionalInstructions', 'collection', array (
+                    'type'         => new FunctionalInstructionType(),
+                    'allow_add'    => true,
+                    'allow_delete' => true,
+                    // 'by_reference' => false
+                )
+            )
             ->add('contents', 'collection', array (
                     'type'         => new ContentType(),
                     'allow_add'    => true,

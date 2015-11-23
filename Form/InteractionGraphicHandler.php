@@ -136,6 +136,7 @@ class InteractionGraphicHandler extends \UJM\ExoBundle\Form\InteractionHandler
         $instructions = new ArrayCollection();
         $contents = new ArrayCollection();
         $complementaryInformations = new ArrayCollection();
+        $functionalInstructions = new ArrayCollection();
         $question = $interGraphic->getInteraction()->getQuestion();
         
         foreach ($question->getInstructions() as $instruction) {
@@ -147,6 +148,9 @@ class InteractionGraphicHandler extends \UJM\ExoBundle\Form\InteractionHandler
         foreach ($question->getComplementaryInformations() as $complementaryInformation) {
             $complementaryInformations->add($complementaryInformation);
         }
+        foreach ($question->getFunctionalInstructions() as $functionalInstruction) {
+            $functionalInstructions->add($functionalInstruction);
+        }
         
         for ($i=0; $i<count($instructions); $i++) {
             $instructions->get($i)->setQuestion($question);
@@ -157,10 +161,14 @@ class InteractionGraphicHandler extends \UJM\ExoBundle\Form\InteractionHandler
         for ($i=0; $i<count($complementaryInformations); $i++) {
             $complementaryInformations->get($i)->setQuestion($question);
         }
+        for ($i=0; $i<count($functionalInstructions); $i++) {
+            $functionalInstructions->get($i)->setQuestion($question);
+        }
 
         $question->setInstructions($instructions);
         $question->setContents($contents);
         $question->setComplementaryInformations($complementaryInformations);
+        $question->setFunctionalInstructions($functionalInstructions);
         
         foreach ($question->getInstructions() as $instruction) {
             if ($instruction->getMedia() === null || $instruction->getMedia() === "") {
@@ -175,6 +183,11 @@ class InteractionGraphicHandler extends \UJM\ExoBundle\Form\InteractionHandler
         foreach ($question->getComplementaryInformations() as $complementaryInformation) {
             if ($complementaryInformation->getMedia() === null || $complementaryInformation->getMedia() === "") {
                 $question->removeComplementaryInformation($complementaryInformation);
+            }
+        }
+        foreach ($question->getFunctionalInstructions() as $functionalInstruction) {
+            if ($functionalInstruction->getMedia() === null || $functionalInstruction->getMedia() === "") {
+                $question->removeFunctionalInstruction($functionalInstruction);
             }
         }
         

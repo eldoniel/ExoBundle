@@ -4,6 +4,7 @@
 
 {% include "UJMExoBundle:Partial:interactionPaper.html.twig" %}
 
+<input type="hidden" id="type_question" value="qcm" />
 <table class="table-striped" cellspacing="5" cellpadding="2" border="0">
     {% for choice in interactionToDisplayed.choices %}
         {% set checked = "" %}
@@ -12,14 +13,53 @@
                 {% set checked = "checked" %}
             {% endif %}
             {% if interactionToDisplayed.typeQCM.code == 2 %}
-                <td><p><INPUT type="radio" name="choice" value="{{ choice.id }}" {{ checked }}/></p></td>
+                <td><p><INPUT type="radio" name="choice" value="{{ choice.id }}" {{ checked }} id="input{{ choice.id }}" /></p></td>
                     {% else %}
-                <td><p><INPUT type="checkbox" name="choice[]" value="{{ choice.id }}" {{ checked }}/></p></td>
+                <td><p><INPUT type="checkbox" name="choice[]" value="{{ choice.id }}" {{ checked }} id="input{{ choice.id }}" /></p></td>
                     {% endif %}
             <td>{{ choice.label|raw }}</td>
         </tr>
     {% endfor %}
 </table>
+                
+{% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
+
+<table border="1" class="table table-striped table-bordered table-condensed general-feedback" style="display: none;">
+    <tr>
+        <th class="classic">{{ 'choice' | trans({}, 'ujm_exo') }}</th>
+        <th class="classic">{{ 'expected_answer' | trans({}, 'ujm_exo') }}</th>
+        <th class="classic">{{ 'your_answer' | trans({}, 'ujm_exo') }}</th>
+        <th class="classic">{{ 'feedback' | trans({}, 'ujm_exo') }}</th>
+    </tr>
+
+    {% for choice in interactionToDisplayed.choices %}
+        <tr>
+            <td class="classic">
+                {{ choice.label|raw }}
+            </td>
+            <td class="classic">
+                {% if choice.rightResponse %}
+                    <img src="{{ asset('bundles/ujmexo/images/checkbox_on.gif') }}" id="resultimg{{ choice.id }}">
+                {% else %}
+                    <img src="{{ asset('bundles/ujmexo/images/checkbox_off.gif') }}" id="resultimg{{ choice.id }}">
+                {% endif %}
+            </td>
+            <td class="classic">
+                <img src="{{ asset('bundles/ujmexo/images/checkbox_off.gif') }}" id="img{{ choice.id }}">
+            </td>
+            <td class="classic">
+                {% if choice.feedback is not empty %}
+                    {{ choice.feedback|raw }}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+<span class="general-feedback" style="display: none;">{{ interactionToDisplayed.interaction.feedback|raw }}</span>
 
 {% include "UJMExoBundle:Partial:hintPaper.html.twig" %}
 

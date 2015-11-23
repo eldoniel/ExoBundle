@@ -1,0 +1,9 @@
+<span id="add-functionalInstruction" class="btn btn-primary" style="margin-bottom: 5px;">{{ 'add_functional_instruction' | trans({}, 'ujm_exo') }}</span>
+<ul class="list-group functionalInstructions" data-prototype="{{ form_widget(form.interaction.question.functionalInstructions.vars.prototype.media)|e }}">
+    {% for functionalInstruction in form.interaction.question.functionalInstructions %}
+        <li class="list-group-item col-md-12" >
+            {{ form_widget(functionalInstruction.media) }}
+        </li>
+    {% endfor %}
+</ul>
+<hr>

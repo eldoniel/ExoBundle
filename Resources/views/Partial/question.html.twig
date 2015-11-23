@@ -6,9 +6,6 @@
         <a id="idDescriptionButton" class="btn btn-default" data-toggle="collapse" data-target="#descriptionDiv" onClick="statusButton('idDescription','descriptionDiv');" ><i id="idDescription" class=""></i>&nbsp;{{'description' | trans({}, 'ujm_exo') }}</a>
         {{ form_errors(form.interaction.question.category) }}
     </div>
-    {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
-    {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
-    {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
    <div id="categoryDiv" class="form-group row collapse">
          <label class="control-label col-md-1">{{ 'category' | trans({}, 'ujm_exo') }}</label>
         <div class="col-md-5">
@@ -25,6 +22,9 @@
        </div>
        <a id="buttonEdition" class="btn btn-primary" title="{{'advanced_edition' | trans({}, 'ujm_exo') }}" onClick="advancedEdition('interaction_question_description','buttonEdition',event);"><i class="fa fa-font"></i></a>
    </div>
+    {% include "UJMExoBundle:Partial:grammar/instructions.html.twig" %}
+    {% include "UJMExoBundle:Partial:grammar/contents.html.twig" %}
+    {% include "UJMExoBundle:Partial:grammar/complementaryInformations.html.twig" %}
    <div class="form-group row {% if not form.interaction.invite.vars.valid %} has-error{% endif %}">
        <label class="control-label col-md-1">{{ 'question' | trans({}, 'ujm_exo') }}</label>
        <div class="control-label col-md-7">
@@ -38,13 +38,6 @@
            {{ form_errors(form.interaction.hints) }}
        </div>
    </div>
-
-<div class="form-group">
-    <a id="idFeedbackButton" class="btn btn-default" data-toggle="collapse" data-target="#collepseinteraction" title="{{ 'interaction_feedback' | trans({}, 'ujm_exo') }}" onClick="statusButton('idFeedback','collepseinteraction');"><i id="idFeedback" class=""></i>&nbsp;{{ 'feedback' | trans({}, 'ujm_exo') }}</a>
-    <div id="collepseinteraction" class="list-group collapse">
-        <div class="list-group-item">{{ form_widget(form.interaction.feedBack) }}</div>
-    </div>
-</div>
 
 <hr>
 <input type="hidden" id="pathDrop" value="{{ path('ujm_category_drop') }}"/>

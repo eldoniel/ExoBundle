@@ -4,6 +4,7 @@
 
 {% include "UJMExoBundle:Partial:interactionPaper.html.twig" %}
 
+<input type="hidden" id="type_question" value="hole" />
 <div id="interHoleResponse">
     {{ interactionToDisplayed.htmlWithoutValue | raw }}
     {% if response != '' %}
@@ -14,6 +15,13 @@
         </script>
     {% endif %}
 </div>
+                
+{% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
+
+<span class="general-feedback" style="display: none;"><h3 class="panel-title">{{ 'expected_answer' | trans({}, 'ujm_exo') }}</h3>
+<div id="eAnswer" >{{ interactionToDisplayed.html|raw }}</div></span>
+
+<span class="general-feedback" style="display: none;">{{ interactionToDisplayed.interaction.feedback|raw }}</span>
 
 {% include "UJMExoBundle:Partial:hintPaper.html.twig" %}
 
