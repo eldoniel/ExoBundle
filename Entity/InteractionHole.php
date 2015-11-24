@@ -36,12 +36,12 @@ class InteractionHole
     private $htmlWithoutValue;
 
     /**
-     * @ORM\OneToOne(targetEntity="UJM\ExoBundle\Entity\Interaction", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="UJM\ExoBundle\Entity\Interaction", cascade={"remove", "persist"})
      */
     private $interaction;
 
     /**
-     * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\Hole", mappedBy="interactionHole", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="UJM\ExoBundle\Entity\Hole", mappedBy="interactionHole", cascade={"remove", "persist"})
      */
     private $holes;
 
