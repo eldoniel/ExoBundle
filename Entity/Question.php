@@ -122,7 +122,7 @@ class Question
      */
     public function __construct()
     {
-        $this->documents = new \Doctrine\Common\Collections\ArrayCollection;
+        $this->documents = new ArrayCollection;
         $this->setLocked(false);
         $this->setModel(false);
         $this->instructions = new ArrayCollection();
@@ -493,5 +493,48 @@ class Question
         }
         
         return $this;
+    }
+    
+    public function __clone()
+    {
+        $this->id = null;
+        
+        // Instructions relation
+        $newInstructions = new ArrayCollection();
+        foreach ($this->instructions as $instruction) {
+            $newInstruction = clone $instruction;
+            $newInstruction->setQuestion($this);
+            
+            $newInstructions->add($newInstruction);
+        }
+        $this->instructions = $newInstructions;
+        
+        // Contents relation
+        $newContents = new ArrayCollection();
+        foreach ($this->contents as $content) {
+            $newContent = clone $content;
+            $newContent->setQuestion($this);
+            
+            $newContents->add($newContent);
+        }
+        $this->contents = $newContents;
+        
+        $newComplementaryInformations = new ArrayCollection();
+        foreach ($this->complementaryInformations as $complementaryInformation) {
+            $newComplementaryInformation = clone $complementaryInformation;
+            $newComplementaryInformation->setQuestion($this);
+            
+            $newComplementaryInformations->add($newComplementaryInformation);
+        }
+        $this->complementaryInformations = $newComplementaryInformations;
+        
+        $newFunctionalInstructions = new ArrayCollection();
+        foreach ($this->functionalInstructions as $functionalInstruction) {
+            $newFunctionalInstruction = clone $functionalInstruction;
+            $newFunctionalInstruction->setQuestion($this);
+            
+            $newFunctionalInstructions->add($newFunctionalInstruction);
+        }
+        $this->functionalInstructions = $newFunctionalInstructions;
     }
 }

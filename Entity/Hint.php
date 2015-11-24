@@ -99,4 +99,9 @@ class Hint
     {
         $this->interaction = $interaction;
     }
+    
+    public function __clone()
+    {
+        $this->id = null;
+    }
 }

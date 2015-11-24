@@ -81,8 +81,6 @@ class InteractionHoleHandler extends \UJM\ExoBundle\Form\InteractionHandler{
         }
         $interHole->setHtml($htmlTiny);
         $this->em->persist($interHole);
-        $this->em->persist($interHole->getInteraction()->getQuestion());
-        $this->em->persist($interHole->getInteraction());
 
         $this->persistHints($interHole);
 
