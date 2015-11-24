@@ -143,4 +143,9 @@ class WordResponse
     {
         $this->hole = $hole;
     }
+    
+    public function __clone()
+    {
+        $this->id = null;
+    }
 }

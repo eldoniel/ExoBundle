@@ -276,7 +276,7 @@ abstract class InteractionHandler
         $title = $copy->getInteraction()->getQuestion()->getTitle();
         $copy->getInteraction()->getQuestion()
              ->setTitle($title.' #');
-
+        
         $this->isClone = TRUE;
         $this->onSuccessAdd($copy);
     }
