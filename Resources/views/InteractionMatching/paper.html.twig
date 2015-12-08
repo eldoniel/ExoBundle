@@ -117,6 +117,8 @@
                         </tr>
                     </table>
                 </center>
+                
+                {% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
 
                 {% if interactionToDisplayed.interaction.hints is not empty %}
                     {% set tryInteraction = interactionToDisplayed %}

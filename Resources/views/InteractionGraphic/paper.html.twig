@@ -78,6 +78,8 @@
                          />
                 </p>
             </div>
+                
+            {% include "UJMExoBundle:Partial:grammar/showFunctionalInstructions.html.twig" %}
 
             <form name="ValidGraphic" id="ValidGraphic" action="{{ path('ujm_interactiongraphic_response') }}" method="post">
                 <input type="hidden" id="nbpointer" name="nbpointer" value="{{ i }}"/>
