@@ -198,10 +198,10 @@ class HoleHandler implements QuestionHandlerInterface
             ->findOneByQuestion($question);
 
         foreach ($data as $answer) {
-            if ($answer || $answer !== null) {
-                if (!is_string($answer) && !is_numeric($answer)) {
-                    return ['Answer array must contain only strings or numeric identifiers, ' . gettype($answer) . ' given.'];
-                }
+            if (!is_array($answer)) {
+                var_dump($answer);
+                die();
+                return ['Answer array must contain only a couple holeId-answerText, ' . gettype($answer) . ' given.'];
             }
         }
 
@@ -220,7 +220,7 @@ class HoleHandler implements QuestionHandlerInterface
 
         $mark = 0;
 
-        foreach ($data as $answer) {
+      /*  foreach ($data as $answer) {
             foreach ($interaction->getHoles() as $hole) {
                 foreach ($hole->getWordResponses() as $wd) {
                     if ($hole->getSelector() === true) {
@@ -235,17 +235,16 @@ class HoleHandler implements QuestionHandlerInterface
                     }
                 }
             }
-        }
+        }*/
         
-        $answers = [];
         $i=0;
         foreach ($data as $answer) {
             if ($answer || $answer !== null) {
-                $answers[$i] = $answer;
+                $answers[] = $answer;
             }
             $i++;
         }
-
+        
         if ($mark < 0) {
             $mark = 0;
         }

@@ -55,12 +55,19 @@
                             if (currElemGParent.getAttribute('id') === "answer_" + this.question.id) {
                                 id_answer = elements[j].getAttribute("id");
                                 id_question = this.question.id;
-                                Object.keys(answers).map(function(key){
-                                    if (key === id_answer) {
-                                        $('#answer_' + id_question).find('#'+id_answer).val(answers[key]);
+                                for (var i=0; i<answers.length; i++) {
+                                    if (answers[i].holeId.toString() === id_answer) {
+                                        var element = $('#answer_' + id_question).find('#'+id_answer);
+                                        if (element.prop('tagName') === 'INPUT') {
+                                            $('#answer_' + id_question).find('#'+id_answer).val(answers[i].answerText);
+                                        }
+                                        else {
+                                            $('#answer_' + id_question).find('#'+id_answer).val(parseInt(answers[i].answerText));
+                                        }
+                                        //$('#answer_' + id_question).find('#'+id_answer).val(answers[i].answerText);
                                         $('#answer_' + id_question).find('#'+id_answer).prop('disabled', true);
                                     }
-                                });
+                                }
                             }
                             
                             /**
@@ -125,21 +132,22 @@
                         
                         for (var j=0; j<holes.length; j++) {
                             good_answer = false;
-                            Object.keys(answers).map(function(key){
-                                if (holes[j].position === key) {
-                                    for (var k=0; k<holes[j].wordResponses.length; k++) {
+                            for (var k=0; k<answers.length; k++) {
+                                if (holes[j].position === answers[k].holeId.toString()) {
+                                    for (var l=0; l<holes[j].wordResponses.length; l++) {
                                         if (holes[j].selector) {
-                                            value_to_compare = holes[j].wordResponses[k].id;
+                                            value_to_compare = holes[j].wordResponses[l].id.toString();
                                         }
                                         else {
-                                            value_to_compare = holes[j].wordResponses[k].response;
+                                            value_to_compare = holes[j].wordResponses[l].response;
                                         }
-                                        if (value_to_compare === answers[key] && holes[j].wordResponses[k].score > 0) {
+                                        if (value_to_compare === answers[k].answerText && holes[j].wordResponses[l].score > 0) {
                                             good_answer = true;
                                         }
                                     }
                                 }
-                            });
+                            }
+                            
                             if (good_answer) {
                                 $('#answer_' + this.question.id).find('#'+holes[j].position).css("color", "#00A700");
                             }

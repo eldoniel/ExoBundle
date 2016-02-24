@@ -42,12 +42,9 @@
              */
             this.setPreviousAnswers = function () {
                 var answers = this.currentQuestionPaperData.answer;
-                var array_answers = new Array();
-                Object.keys(answers).map(function(key){
-                    $("#"+key).val(answers[key]);
-                    array_answers[key] = answers[key];
-                });
-                this.currentQuestionPaperData.answer = array_answers;
+                for (var i=0; i<answers.length; i++) {
+                    $("#"+answers[i].holeId).val(answers[i].answerText);
+                }
                 PlayerDataSharing.setStudentData(this.question, this.currentQuestionPaperData);
             };
             
@@ -64,7 +61,19 @@
                     document.getElementById(elements[i].id).onchange = function () {
                         var id = this.id;
                         var value = this.value;
-                        cqpd.answer[id] = value;
+                        var updated = false;
+                        for (var j=0; j<cqpd.answer.length; j++) {
+                            if (cqpd.answer[j].holeId === id) {
+                                cqpd.answer[j].answerText = value;
+                                updated = true;
+                            }
+                        }
+                        if (!updated) {
+                            var answer = new Object();
+                            answer.holeId = id;
+                            answer.answerText = value;
+                            cqpd.answer.push(answer);
+                        }
                         PlayerDataSharing.setStudentData(question, cqpd);
                     };
                 }
@@ -82,9 +91,21 @@
                     var question = this.question;
                     var id = elements[i].id;
                     var value = elements[i].value;
-                    cqpd.answer[id] = value;
-                    PlayerDataSharing.setStudentData(question, cqpd);
+                    var updated = false;
+                    for (var j=0; j<cqpd.answer.length; j++) {
+                        if (cqpd.answer[j].holeId === id) {
+                            cqpd.answer[j].answerText = value;
+                            updated = true;
+                        }
+                    }
+                    if (!updated) {
+                        var answer = new Object();
+                        answer.holeId = id;
+                        answer.answerText = value;
+                        cqpd.answer.push(answer);
+                    }
                 }
+                PlayerDataSharing.setStudentData(question, cqpd);
             };
 
             /**
