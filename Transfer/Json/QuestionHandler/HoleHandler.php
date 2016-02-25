@@ -172,8 +172,6 @@ class HoleHandler implements QuestionHandlerInterface
         foreach ($parts as $key=>$value) {
             $array[$key] = $value;
         }
-        
-    //    $parts = explode(';', $response->getResponse());
 
         return array_filter($array, function ($part) {
             return $part !== '';

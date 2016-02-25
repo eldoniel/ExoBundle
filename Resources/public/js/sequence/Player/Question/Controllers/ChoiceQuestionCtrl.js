@@ -182,7 +182,7 @@
              */
             this.answerExists = function (prevAnswer, searched, isMultiple) {
                 for (var j = 0; j < prevAnswer.length; j++) {
-                    if (prevAnswer[j] === searched) {
+                    if (prevAnswer[j].choiceId === searched) {
                         return true;
                     }
                 }
@@ -212,14 +212,16 @@
              * For that purpose we use a shared service
              */
             this.updateStudentData = function (choiceId) {
+                var answer = new Object();
+                answer.choiceId = choiceId;
                 if (this.question.multiple) {
                     if (this.multipleChoice[choiceId]) {
-                        this.currentQuestionPaperData.answer.push(choiceId);
+                        this.currentQuestionPaperData.answer.push(answer);
                     }
                     else {
                         // unset from this.currentQuestionPaperData.answer
                         for (var i = 0; i < this.currentQuestionPaperData.answer.length; i++) {
-                            if (this.currentQuestionPaperData.answer[i] === choiceId) {
+                            if (this.currentQuestionPaperData.answer[i].choiceId === choiceId) {
                                 this.currentQuestionPaperData.answer.splice(i, 1);
                             }
                         }
@@ -227,7 +229,8 @@
                 }
                 else {
                     if (this.uniqueChoice.length > 0) {
-                        this.currentQuestionPaperData.answer[0] = this.uniqueChoice;
+                        answer.choiceId = this.uniqueChoice;
+                        this.currentQuestionPaperData.answer[0] = answer;
                     }
                 }
                 PlayerDataSharing.setStudentData(this.question, this.currentQuestionPaperData);

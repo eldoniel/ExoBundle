@@ -207,7 +207,7 @@ class QcmHandler implements QuestionHandlerInterface
      */
     public function convertAnswerDetails(Response $response)
     {
-        $parts = explode(';', $response->getResponse());
+        $parts = json_decode($response->getResponse());
 
         return array_filter($parts, function ($part) {
             return $part !== '';
@@ -238,11 +238,11 @@ class QcmHandler implements QuestionHandlerInterface
         }, $interaction->getChoices()->toArray());
 
         foreach ($data as $id) {
-            if (!is_string($id)) {
-                return ['Answer array must contain only string identifiers'];
+            if (!is_array($id)) {
+                return ['Answer array must contain only arrays, ' . gettype($id) . ' given'];
             }
 
-            if (!in_array($id, $choiceIds)) {
+            if (!in_array($id['choiceId'], $choiceIds)) {
                 return ['Answer array identifiers must reference question choices'];
             }
         }
@@ -269,18 +269,25 @@ class QcmHandler implements QuestionHandlerInterface
         }
 
         $mark = 0;
-
-        foreach ($interaction->getChoices() as $choice) {
-            if (in_array((string) $choice->getId(), $data)) {
-                $mark += $choice->getWeight();
+        $i=0;
+        $answers = array();
+        foreach ($data as $answer) {
+            if ($answer || $answer !== null) {
+                $answers[] = $answer;
+            }
+            $i++;
+            foreach ($interaction->getChoices() as $choice) {
+                if ((string) $choice->getId() === $answer['choiceId']) {
+                    $mark += $choice->getWeight();
+                }
             }
         }
+        
+        $result = json_encode($answers);
 
         if ($mark < 0) {
             $mark = 0;
         }
-
-        $result = count($data) > 0 ? implode(';', $data) : '';
 
         $response->setResponse($result);
         $response->setMark($mark);

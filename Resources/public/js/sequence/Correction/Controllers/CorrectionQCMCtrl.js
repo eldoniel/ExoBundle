@@ -65,7 +65,7 @@
                                     var found = false;
                                     // search for expected answer checked by student
                                     for (var k = 0; k < currentQuestion.answer.length; k++) {
-                                        if (currentQuestion.answer[k] === choice.id) {
+                                        if (currentQuestion.answer[k].choiceId === choice.id) {
                                             isValid = 1;
                                             found = true;
                                         }
@@ -77,7 +77,7 @@
                                 } else if (solutions[j].id === choice.id && solutions[j].score <= 0) {
                                     // search for unexpected answer checked by student
                                     for (var k = 0; k < currentQuestion.answer.length; k++) {
-                                        if (currentQuestion.answer[k] === choice.id) {
+                                        if (currentQuestion.answer[k].choiceId === choice.id) {
                                             isValid = 2;
                                         }
                                     }
