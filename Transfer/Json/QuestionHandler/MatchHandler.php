@@ -271,7 +271,7 @@ class MatchHandler implements QuestionHandlerInterface {
      */
     public function convertAnswerDetails(Response $response) {
 
-        $parts = explode(';', $response->getResponse());
+        $parts = json_decode($response->getResponse());
 
         return array_filter($parts, function ($part) {
             return $part !== '';
@@ -309,9 +309,8 @@ class MatchHandler implements QuestionHandlerInterface {
         $targetIds = array();
         foreach ($data as $answer) {
             if ($answer !== '') {
-                $set = explode(',', $answer);
-                array_push($sourceIds, $set[0]);
-                array_push($targetIds, $set[1]);
+                array_push($sourceIds, $answer["firstSetId"]);
+                array_push($targetIds, $answer["secondSetId"]);
             }
         }
 
@@ -362,8 +361,14 @@ class MatchHandler implements QuestionHandlerInterface {
         $targetIds = array();
         foreach ($data as $answer) {
             if ($answer !== '') {
-                $set = explode(',', $answer);
-                array_push($targetIds, $set[1]);
+                array_push($targetIds, $answer["secondSetId"]);
+            }
+        }
+        
+        $answers = array();
+        foreach ($data as $answer) {
+            if ($answer !== '') {
+                $answers[] = $answer;
             }
         }
 
@@ -378,7 +383,7 @@ class MatchHandler implements QuestionHandlerInterface {
             $mark = 0;
         }
 
-        $result = count($data) > 0 ? implode(';', $data) : '';
+        $result = json_encode($answers);
         $response->setResponse($result);
         $response->setMark($mark);
     }

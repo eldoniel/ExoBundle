@@ -150,9 +150,8 @@
             this.formatStudentAnswers = function (answers, label) {
                 var formatted = [];
                 for (var j = 0; j < answers.length; j++) {
-                    var set = answers[j].split(',');
-                    var proposalId = set[0];
-                    var associatedLabelId = set[1];
+                    var proposalId = answers[j].firstSetId;
+                    var associatedLabelId = answers[j].secondSetId;
                     if (associatedLabelId === label.id) {
                         var proposal = this.getProposalFromId(proposalId);
                         formatted.push(proposal);

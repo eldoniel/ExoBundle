@@ -63,10 +63,14 @@
             this.updateStudentData = function () {
                 // build answers
                 this.currentQuestionPaperData.answer = [];
+                console.log("updateStudentData");
+                console.log(this.currentQuestionPaperData.answer);
                 if (this.question.toBind) {
                     for (var i = 0; i < this.connections.length; i++) {
                         if (this.connections[i] !== '' && this.connections[i].source && this.connections[i].target) {
-                            var answer = this.connections[i].source + ',' + this.connections[i].target;
+                            var answer = new Object();
+                            answer.firstSetId = this.connections[i].source;
+                            answer.secondSetId = this.connections[i].target;
                             this.currentQuestionPaperData.answer.push(answer);
                         }
                     }
@@ -74,7 +78,9 @@
                 } else { // toDrag
                     for (var i = 0; i < this.dropped.length; i++) {
                         if (this.dropped[i] !== '' && this.dropped[i].source && this.dropped[i].target) {
-                            var answer = this.dropped[i].source + ',' + this.dropped[i].target;
+                            var answer = new Object();
+                            answer.firstSetId = this.dropped[i].source;
+                            answer.secondSetId = this.dropped[i].target;
                             this.currentQuestionPaperData.answer.push(answer);
                         }
                     }
@@ -199,16 +205,19 @@
              * problem when updating a previously given answer
              */
             this.addPreviousConnections = function () {
+                console.log("addPreviousConnections");
+                console.log(this.currentQuestionPaperData.answer);
                 if (this.currentQuestionPaperData.answer && this.currentQuestionPaperData.answer.length > 0) {
                     // init previously given answer
                     var sets = this.currentQuestionPaperData.answer;
                     for (var i = 0; i < sets.length; i++) {
                         if (sets[i] && sets[i] !== '') {
-                            var items = sets[i].split(',');
-                            jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1]});
+                            var firstSetId = sets[i].firstSetId;
+                            var secondSetId = sets[i].secondSetId;
+                            jsPlumb.connect({source: "draggable_" + firstSetId, target: "droppable_" + secondSetId});
                             var connection = {
-                                source: items[0],
-                                target: items[1]
+                                source: firstSetId,
+                                target: secondSetId
                             };
                             this.connections.push(connection);
                         }
@@ -219,21 +228,24 @@
 
             this.addPreviousDroppedItems = function () {
                 this.dropped = [];
+                console.log("addPreviousDropped");
+                console.log(this.currentQuestionPaperData.answer);
                 if (this.currentQuestionPaperData.answer && this.currentQuestionPaperData.answer.length > 0) {
                     // init previously given answer
                     var sets = this.currentQuestionPaperData.answer;
                     for (var i = 0; i < sets.length; i++) {
                         if (sets[i] && sets[i] !== '') {
-                            var items = sets[i].split(',');
+                            var firstSetId = sets[i].firstSetId;
+                            var secondSetId = sets[i].secondSetId;
                             // disable corresponding draggable item
-                            $('#draggable_' + items[0]).draggable("disable");
+                            $('#draggable_' + firstSetId).draggable("disable");
                             // ui update
-                            $('#draggable_' + items[0]).fadeTo(100, 0.3);
-                            $('#droppable_' + items[1]).addClass("state-highlight");
-                            var label = $('#draggable_' + items[0])[0].innerHTML;
+                            $('#draggable_' + firstSetId).fadeTo(100, 0.3);
+                            $('#droppable_' + secondSetId).addClass("state-highlight");
+                            var label = $('#draggable_' + firstSetId)[0].innerHTML;
                             var item = {
-                                source: items[0],
-                                target: items[1],
+                                source: firstSetId,
+                                target: secondSetId,
                                 label: label
                             };
                             this.dropped.push(item);
