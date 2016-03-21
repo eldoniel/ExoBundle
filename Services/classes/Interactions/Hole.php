@@ -163,7 +163,12 @@ class Hole extends Interaction {
 
              if ($hole->getSelector()) {
                  $wr = $em->getRepository('UJMExoBundle:WordResponse')->find($response);
-                 $tabResp[$hole->getPosition()] = $wr->getResponse();
+                 if ($wr === null) {
+                     $tabResp[$hole->getPosition()] = "...";
+                 }
+                 else {
+                     $tabResp[$hole->getPosition()] = $wr->getResponse();
+                 }
              } else {
                  $from = array("'", '"');
                  $to = array("\u0027","\u0022");
@@ -187,7 +192,12 @@ class Hole extends Interaction {
          $em = $this->doctrine->getManager();
          if ($hole->getSelector() == true) {
              $wr = $em->getRepository('UJMExoBundle:WordResponse')->find($response);
-             $mark = $wr->getScore();
+             if ($wr === null) {
+                 $mark = 0;
+             }
+             else {
+                $mark = $wr->getScore();
+             }
          } else {
              foreach ($hole->getWordResponses() as $wr) {
                  $mark = $this->getScoreWordResponse($wr, $response);

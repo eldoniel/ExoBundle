@@ -171,6 +171,10 @@ function paperResponseHole(response) {
 }
 
 $(document).ready(function() {
+    
+    $('#interHoleResponse').find('.blank').each(function () {
+        $(this).prepend("<option value='' selected='selected'>...</option>");
+    });
 
     if ( (typeof allowToInterrupt !== 'undefined') && (!allowToInterrupt) ) {
         $(window).bind("beforeunload",function(){
