@@ -384,16 +384,17 @@ ExerciseService.prototype.submitAnswer = function submitAnswer(paperId, studentD
 
     this.$http
         .put(
-            Routing.generate('exercise_submit_answer', {paperId: paperId, questionId: studentData.question.id}), {data: studentData.answers}
+            Routing.generate('exercise_submit_answer', { paperId: paperId, questionId: studentData.question.id }),
+            { data: studentData.answers }
         )
         // Success callback
-        .success(function (response) {
+        .success(function onSuccess(response) {
             // TODO : display message
 
             deferred.resolve(response);
         })
         // Error callback
-        .error(function (data, status) {
+        .error(function onError(data, status) {
             // TODO : display message
 
             deferred.reject([]);
