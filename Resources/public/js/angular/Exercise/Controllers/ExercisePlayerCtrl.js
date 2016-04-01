@@ -82,8 +82,6 @@ ExercisePlayerCtrl.prototype.setCurrentStep = function setCurrentStep(index) {
     this.isFirstStep = index === 0;
     this.isLastStep  = index === this.exercise.steps.length - 1;
 
-    console.log(this.exercise.steps);
-
     // check new index is in computable range
     if (index < this.exercise.steps.length && index >= 0) {
         this.currentStep = this.exercise.steps[index];
