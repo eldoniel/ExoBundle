@@ -139,7 +139,6 @@ MatchQuestionCtrl.prototype.checkAnswerValidity = function checkAnswerValidity(l
 };
 
 MatchQuestionCtrl.prototype.colorBindings = function colorBindings() {
-    console.log(this.question.solutions);
     for (var i=0; i<this.connections.length; i++) {
         var rightAnswer = false;
         var c = jsPlumb.select({source: "draggable_" + this.connections[i].source, target: "droppable_" + this.connections[i].target});
@@ -156,12 +155,26 @@ MatchQuestionCtrl.prototype.colorBindings = function colorBindings() {
             }
             else {
                 c.setType("default");
-            /*    c.id = "chaussette" + this.connections[i].source + "-" + this.connections[i].target;
+            /*  Setting an ID on a connection could allow to update it from DOM,
+             *  But the following doesn't seem to add the ID to the DOM object...
+                c.id = "connection_" + this.connections[i].source + "-" + this.connections[i].target;
                 console.log(c);
-                console.log(document.getElementById("chaussette" + this.connections[i].source + "-" + this.connections[i].target));*/
+                console.log(document.getElementById("connection" + this.connections[i].source + "-" + this.connections[i].target));*/
+                
+                /*
+                 * If we can unbind the click, we'd need to bind it back, on specific connections
+                 */
             }
         }
+        if (this.feedback.visible) {
+            c.unbind("click");
+        }
     }
+    // This line unbinds all "click" events
+    //jsPlumb.unbind("click");
+    // This line doesn't do anything...
+    // c.unbind("click");
+    // Need to find a way to unbind event on a specific connection, and not on every connections
 };
 
 MatchQuestionCtrl.prototype.dropIsValid = function dropIsValid(item) {
@@ -580,9 +593,6 @@ MatchQuestionCtrl.prototype.addPreviousConnections = function addPreviousConnect
                             var c = jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1], type: "right"});
                             created = true;
                             c.setLabel({label: this.question.solutions[j].feedback, cssClass: "bindingLabel"});
-                        /*    c.unbind("click");
-                            console.log("click unbinded");
-                            c.bind("click", this.removeConnection(c));*/
                         }
                     }
                     if (!created) {
