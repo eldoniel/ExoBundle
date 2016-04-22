@@ -139,6 +139,7 @@ MatchQuestionCtrl.prototype.checkAnswerValidity = function checkAnswerValidity(l
 };
 
 MatchQuestionCtrl.prototype.colorBindings = function colorBindings() {
+    console.log(this.question.solutions);
     for (var i=0; i<this.connections.length; i++) {
         var rightAnswer = false;
         var c = jsPlumb.select({source: "draggable_" + this.connections[i].source, target: "droppable_" + this.connections[i].target});
@@ -146,6 +147,7 @@ MatchQuestionCtrl.prototype.colorBindings = function colorBindings() {
             if (this.connections[i].source === this.question.solutions[j].firstId && this.connections[i].target === this.question.solutions[j].secondId) {
                 rightAnswer = true;
                 c.setType("right");
+                c.setLabel({label: this.question.solutions[j].feedback, cssClass: "bindingLabel"});
             }
         }
         if (!rightAnswer) {
@@ -577,8 +579,7 @@ MatchQuestionCtrl.prototype.addPreviousConnections = function addPreviousConnect
                         if (items[0] === this.question.solutions[j].firstId && items[1] === this.question.solutions[j].secondId) {
                             var c = jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1], type: "right"});
                             created = true;
-                            //jsPlumb.select({source: "draggable_" + items[0], target: "droppable_" + items[i]}).unbind("click");
-                            c.setLabel({label: "wrong", cssClass: "bindingLabel"});
+                            c.setLabel({label: this.question.solutions[j].feedback, cssClass: "bindingLabel"});
                         /*    c.unbind("click");
                             console.log("click unbinded");
                             c.bind("click", this.removeConnection(c));*/
@@ -589,14 +590,10 @@ MatchQuestionCtrl.prototype.addPreviousConnections = function addPreviousConnect
                     }
                 }
 
-                //var c = jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1], type: "right"});
-
                 var connection = {
                     source: items[0],
                     target: items[1]
                 };
-                
-                //jsPlumb.select({source: "draggable_" + items[0], target: "droppable_" + items[1]}).setType("wrong");
 
                 this.connections.push(connection);
             }
