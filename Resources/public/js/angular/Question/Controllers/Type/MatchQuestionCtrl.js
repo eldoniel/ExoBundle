@@ -138,6 +138,30 @@ MatchQuestionCtrl.prototype.checkAnswerValidity = function checkAnswerValidity(l
     }
 };
 
+MatchQuestionCtrl.prototype.colorBindings = function colorBindings() {
+    for (var i=0; i<this.connections.length; i++) {
+        var rightAnswer = false;
+        var c = jsPlumb.select({source: "draggable_" + this.connections[i].source, target: "droppable_" + this.connections[i].target});
+        for (var j=0; j<this.question.solutions.length; j++) {
+            if (this.connections[i].source === this.question.solutions[j].firstId && this.connections[i].target === this.question.solutions[j].secondId) {
+                rightAnswer = true;
+                c.setType("right");
+            }
+        }
+        if (!rightAnswer) {
+            if (this.feedback.visible) {
+                c.setType("wrong");
+            }
+            else {
+                c.setType("default");
+            /*    c.id = "chaussette" + this.connections[i].source + "-" + this.connections[i].target;
+                console.log(c);
+                console.log(document.getElementById("chaussette" + this.connections[i].source + "-" + this.connections[i].target));*/
+            }
+        }
+    }
+};
+
 MatchQuestionCtrl.prototype.dropIsValid = function dropIsValid(item) {
     if (this.question.solutions) {
         for (var i = 0; i < this.question.solutions.length; i++) {
@@ -451,6 +475,9 @@ MatchQuestionCtrl.prototype.onFeedbackShow = function onFeedbackShow() {
             $('.draggable').fadeTo(100, 0.3);
         }
     }
+    else if (this.question.toBind) {
+        this.colorBindings();
+    }
 };
 
 /**
@@ -465,6 +492,9 @@ MatchQuestionCtrl.prototype.onFeedbackHide = function onFeedbackHide() {
             $('#draggable_' + this.dropped[i].source).draggable("disable");
             $('#draggable_' + this.dropped[i].source).fadeTo(100, 0.3);
         }
+    }
+    else if (this.question.toBind) {
+        this.colorBindings();
     }
 };
 
@@ -541,13 +571,32 @@ MatchQuestionCtrl.prototype.addPreviousConnections = function addPreviousConnect
         for (var i = 0; i < sets.length; i++) {
             if (sets[i] && sets[i] !== '') {
                 var items = sets[i].split(',');
+                if (this.feedback.enabled) {
+                    var created = false;
+                    for (var j=0; j<this.question.solutions.length; j++) {
+                        if (items[0] === this.question.solutions[j].firstId && items[1] === this.question.solutions[j].secondId) {
+                            var c = jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1], type: "right"});
+                            created = true;
+                            //jsPlumb.select({source: "draggable_" + items[0], target: "droppable_" + items[i]}).unbind("click");
+                            c.setLabel({label: "wrong", cssClass: "bindingLabel"});
+                        /*    c.unbind("click");
+                            console.log("click unbinded");
+                            c.bind("click", this.removeConnection(c));*/
+                        }
+                    }
+                    if (!created) {
+                        var co = jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1], type: "default"});
+                    }
+                }
 
-                jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1]});
+                //var c = jsPlumb.connect({source: "draggable_" + items[0], target: "droppable_" + items[1], type: "right"});
 
                 var connection = {
                     source: items[0],
                     target: items[1]
                 };
+                
+                //jsPlumb.select({source: "draggable_" + items[0], target: "droppable_" + items[1]}).setType("wrong");
 
                 this.connections.push(connection);
             }
@@ -641,8 +690,8 @@ MatchQuestionCtrl.prototype.removeConnection = function removeConnection(data) {
     var targetId = data.targetId.replace('droppable_', '');
     // connection is removed from dom even with this commented...
     // If not commented, code stops at this methods...
-    // jsPlumb.detach(data);
-
+    jsPlumb.detach(data);
+console.log("pass detach");
     for (var i = 0; i < this.connections.length; i++) {
         if (this.connections[i].source === sourceId && this.connections[i].target === targetId) {
             this.connections.splice(i, 1);

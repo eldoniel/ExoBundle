@@ -22,6 +22,24 @@ var MatchQuestionDirective = function MatchQuestionDirective($timeout, MatchQues
             $timeout(function () {
                 // MatchQuestion sub type is ToBind
                 if (matchQuestionCtrl.question.toBind) {
+                    jsPlumb.registerConnectionTypes({
+                        "right": {
+                            paintStyle:{ strokeStyle:"#5CB85C", lineWidth:4  },
+                            hoverPaintStyle:{ strokeStyle:"green", lineWidth:5 },
+                            cssClass:"connector-normal"
+                        },
+                        "wrong": {
+                            paintStyle:{ strokeStyle:"#D9534F", lineWidth: 4 },
+                            hoverPaintStyle:{ strokeStyle:"red", lineWidth: 5 },
+                            cssClass:"connector-normal"
+                        },
+                        "default": {
+                            paintStyle:{ strokeStyle:"grey", lineWidth: 4 },
+                            hoverPaintStyle:{ strokeStyle:"grey", lineWidth: 5 },
+                            cssClass:"connector-normal"
+                        }
+                    });
+    
                     MatchQuestionService.initBindMatchQuestion();
 
                     jsPlumb.bind("beforeDrop", function (info) {
