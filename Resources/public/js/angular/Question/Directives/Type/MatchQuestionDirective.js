@@ -48,7 +48,15 @@ var MatchQuestionDirective = function MatchQuestionDirective($timeout, MatchQues
 
                     // remove one connection
                     jsPlumb.bind("click", function (connection) {
-                        matchQuestionCtrl.removeConnection(connection);
+                        var deletable = false;
+                        for (var i=0; i<connection._jsPlumb.types.length; i++) {
+                            if (connection._jsPlumb.types[i] === "default") {
+                                deletable = true;
+                            }
+                        }
+                        if (deletable) {
+                            matchQuestionCtrl.removeConnection(connection);
+                        }
                     });
 
                     matchQuestionCtrl.addPreviousConnections();
